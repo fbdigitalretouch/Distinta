@@ -9,8 +9,8 @@ module.exports = (function() {
     var router = require('express').Router();
 
     router.get("/",(req,res) => {
-    User.find()
-    .then(users => res.json(users))
+    Distinta.find()
+    .then(distintas => res.json(distintas))
     .catch(err => res.status(400).json("Error : " + err))
 })
 

@@ -1,5 +1,5 @@
 const express = require("express");
-let User = require("../models/usermodels");
+let User = require("../models/usermodels.js");
 
 
 module.exports = (function () {
