@@ -2,9 +2,8 @@ const express = require("express");
 const cors = require("cors")
 const mongoose = require("mongoose");
 
-const {
-    Schema
-} = mongoose;
+
+const Schema = mongoose.schema
 
 require ("dotenv").config();
 
@@ -17,13 +16,12 @@ app.use(express.json());
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri);
 
-const distintaRouting = require("./routes/distinta.js")
-const userRouting = require("./routes/user.js")
 
-app.use(app.distintaRouting);
-app.use(app.userRouting);
+const distintaRouting = require("./routes/distinta")
+const userRouting = require("./routes/user")
 
-
+app.use("/distinta",distintaRouting);
+app.use("/user",userRouting)
 
 app.listen(port,()=>{console.log("Server is running on port " + port);
 })
