@@ -1,11 +1,13 @@
 const express = require("express");
-let User = require("../models/usermodels.js");
+let User = require("../models/usermodels");
+ User = User.User
 
+    var router = express.Router();
+   
 
 module.exports = (function () {
     'use strict';
 
-    var router = require('express').Router();
 
     router.get("/", (req, res) => {
         User.find()
@@ -13,7 +15,7 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err))
     })
 
-    router.post("add", (req, res) => {
+    router.post("/add", (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
         const newUser = new User({
@@ -26,7 +28,5 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err));
     });
 
-
     return router;
 })();
-
