@@ -28,5 +28,17 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err));
     });
 
+    router.post("/delete/:id", (req, res) => {
+
+        
+        User.findOneAndDelete((req.param.id), (err) => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log("succesfully deleted");
+            }
+        })
+    })
+
     return router;
 })();
