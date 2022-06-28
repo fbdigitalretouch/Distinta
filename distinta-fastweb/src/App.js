@@ -15,7 +15,7 @@ function App() {
     <Navbar/>
     
     <br/>
-    <Route path="/" exact component={DistintaList} />
+   
     </Router>
     </div>
     
