@@ -1,21 +1,28 @@
-import { Nav, Navbar, NavLink } from "react-bootstrap";
+import { Nav, Navbar, NavLink,Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Navbars = () => {
+const Navigationbar = () => {
     return (
-        <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
-            <Navbar.Toggle aria-controls="navbarScroll" data-bs-toggle="collapse" data-bs-target="#navbarScroll" />
-            <Navbar.Collapse id="navbarScroll">
-                <Nav>
-                    <NavLink  eventKey="1" as={Link} to="/">Home</NavLink>
-                    <NavLink  eventKey="2" as={Link} to="/about">About</NavLink>
-                    <NavLink  eventKey="3" as={Link} to="/contact">Contact</NavLink>
-                </Nav>
-            </Navbar.Collapse>     
+        <Navbar collapseOnSelect expand="sm" bg="warning" variant="light" >
+               <Container> 
+                   <Navbar.Brand href="#home">Distinta Fastweb</Navbar.Brand>
+                   <Navbar.Toggle aria-controls="navbarScroll" data-bs-toggle="collapse" data-bs-target="#navbarScroll" /> 
+               </Container>
+                   <Navbar.Collapse id="navbarScroll">
+               <Container>
+                    <Nav >
+                      <Nav.Item> <NavLink  eventKey="1" as={Link} to="/">Home</NavLink>                   </Nav.Item>  
+                      <Nav.Item> <NavLink  eventKey="2" as={Link} to="/login">Login</NavLink>             </Nav.Item>   
+                      <Nav.Item> <NavLink  eventKey="3" as={Link} to="/distinta">Distinta</NavLink>       </Nav.Item>     
+                      <Nav.Item> <NavLink  eventKey="4" as={Link} to="/logout">Logout</NavLink>           </Nav.Item>     
+                      <Nav.Item> <NavLink  eventKey="5" as={Link} to="/Direttore">Direttore</NavLink>     </Nav.Item>  
+                    </Nav>
+               </Container>   
+               </Navbar.Collapse>
         </Navbar>
     );
 }
  
-export default Navbars;
+export default Navigationbar;
 
 // https://codesandbox.io/s/react-bootstrap-navbar-0c6ko?file=/src/App.js

@@ -1,6 +1,11 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import React from "react";
 
-export default class DistintaList extends Component {
+
+function Distinta(){
+    return(
+        <h1>Distinta</h1>
+    )
 
 }
+
+export default Distinta;
