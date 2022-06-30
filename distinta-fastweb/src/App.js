@@ -6,7 +6,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
 } from "react-router-dom";
 
 import Navigationbar from './components/navbar';
@@ -16,7 +15,7 @@ import Logout from "./components/Logout"
 import Direttore from "./components/Direttore"
 import Login from "./components/login-module"
 
-const logged = false;
+const logged = true;
 
 
 // Devo sistemare il login in modo da poter renderizzare condizionalmente i reindirizzamenti solo nel caso in cui 
@@ -27,14 +26,14 @@ function App() {
     <div className="App">
         <Router>
             <Navigationbar/>
-            {logged ? <h1>Benvenuto!</h1> : <Login/>}
+            {logged ? 
             <Routes>
             <Route path="/distinta" element={<DistintaList/>} />
             <Route path="/inserisci" element={<Inserisci/>} />
             <Route path="/logout" element={<Logout/>} />
             <Route path="/direttore" element={<Direttore/>} />
             <Route path="/login" element={<Login/>} />
-            </Routes>
+            </Routes> : <Login/>}
         </Router>
 
     </div>

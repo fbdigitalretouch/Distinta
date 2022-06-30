@@ -18,9 +18,11 @@ module.exports = (function () {
     router.post("/add", (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
+        const distretto = req.body.distretto;
         const newUser = new User({
             username,
-            password
+            password,
+            distretto
         });
 
         newUser.save()

@@ -17,6 +17,7 @@ module.exports = (function () {
     router.post("/add", (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
+        const distretto = req.body.distretto;
         const typeOfOperation = req.body.typeofops;
         const clientName = req.body.client;
         const date = new Date()
@@ -24,6 +25,7 @@ module.exports = (function () {
         const newDistinta = new Distinta({
             username,
             password,
+            distretto,
             typeOfOperation,
             clientName,
             date,
