@@ -12,10 +12,10 @@ const Navigationbar = () => {
                <Container>
                     <Nav >
                       <Nav.Item> <NavLink  eventKey="1" as={Link} to="/">Home</NavLink>                   </Nav.Item>  
-                      <Nav.Item> <NavLink  eventKey="2" as={Link} to="/login">Login</NavLink>             </Nav.Item>   
+                      <Nav.Item> <NavLink  eventKey="2" as={Link} to="/login">Inserisci</NavLink>             </Nav.Item>   
                       <Nav.Item> <NavLink  eventKey="3" as={Link} to="/distinta">Distinta</NavLink>       </Nav.Item>     
                       <Nav.Item> <NavLink  eventKey="4" as={Link} to="/logout">Logout</NavLink>           </Nav.Item>     
-                      <Nav.Item> <NavLink  eventKey="5" as={Link} to="/Direttore">Direttore</NavLink>     </Nav.Item>  
+                      <Nav.Item> <NavLink  eventKey="5" as={Link} to="/direttore">Direttore</NavLink>     </Nav.Item>  
                     </Nav>
                </Container>   
                </Navbar.Collapse>

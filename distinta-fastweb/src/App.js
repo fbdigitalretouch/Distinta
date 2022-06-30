@@ -11,6 +11,9 @@ import {
 
 import Navigationbar from './components/navbar';
 import DistintaList from "./components/distinta-list"
+import Inserisci from "./components/Inserisci"
+import Logout from "./components/Logout"
+import Direttore from "./components/Direttore"
 
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
             <Navigationbar />
             <Routes>
             <Route path="/distinta" element={<DistintaList/>} />
+            <Route path="/login" element={<Inserisci/>} />
+            <Route path="/logout" element={<Logout/>} />
+            <Route path="/direttore" element={<Direttore/>} />
             </Routes>
         </Router>
     </div>
