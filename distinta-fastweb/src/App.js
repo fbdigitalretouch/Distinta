@@ -19,6 +19,9 @@ import Login from "./components/login-module"
 const logged = false;
 
 
+// Devo sistemare il login in modo da poter renderizzare condizionalmente i reindirizzamenti solo nel caso in cui 
+// l'utente sia loggato.
+
 function App() {
   return (
     <div className="App">
