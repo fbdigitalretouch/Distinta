@@ -8,6 +8,7 @@ const distintaSchema = new Schema({
     username: userSchema.userSchema,
     typeOfOperation: String,
     clientName: String,
+    notes:String,
     date:Date,
 }, {
      timestamps: {
@@ -15,7 +16,6 @@ const distintaSchema = new Schema({
     updatedAt: 'updated_at' // and `updated_at` to store the last updated date
   }
 });
-
 
 
 const Distinta = mongoose.model("Distinta", distintaSchema);
