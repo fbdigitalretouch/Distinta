@@ -2,11 +2,7 @@ import './App.css';
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import {BrowserRouter as Router,Routes,Route,} from "react-router-dom";
 
 import Navigationbar from './components/navbar';
 import DistintaList from "./components/distinta-list"
@@ -28,7 +24,8 @@ function App() {
             <Navigationbar/>
             {logged ? 
             <Routes>
-            <Route path="/distinta" element={<DistintaList/>} />
+
+            <Route exact path="/report" element={<DistintaList/>} />
             <Route path="/inserisci" element={<Inserisci/>} />
             <Route path="/logout" element={<Logout/>} />
             <Route path="/direttore" element={<Direttore/>} />
@@ -40,10 +37,5 @@ function App() {
     
   );
 }
-
-
-   //      {() => {if(logged===false){
-   //           return(<Login/>)}
-   //         }}
 
 export default App;

@@ -3,50 +3,67 @@ import React,{useState} from "react";
 import {Container,Form,Button} from "react-bootstrap"
 
 
-function Inserisci(props){
-// const [attivazione,setAttivazione] = useState("")
-//  const baseURL = "/distinta/";
-//  
-//  
-//    React.useEffect(() => {
-//      axios.get("/").then((response) => {
-//        setDistinta(response.data);
-//      });
-//    }, []);
-//  
-//  
-//  
-//  function createAttivazione(req,res) {
-//    axios
-//        .post("/add", {
-//          typeOfOperation:req.body.typeOfOperation,
-//          clientName:req.body.client,
-//          date: new Date()
-//        })
-//        .then((response) => {
-//          setDistinta(response.data);
-//        });
-//  
-//        console.log(distinta)
-//  }
+
+function Inserisci(){
+
+  const [distinta,setDistinta] = useState({
+    typeOfOperation:"",
+    clientName:"",
+    notes:""
+
+  })
+
+  function handleChange(event) {
+    event.preventDefault()
+    const { name, value } = event.target;
+
+    setDistinta((prevNote) => {
+      return {
+        ...prevNote,
+        [name]: value
+      };
+      
+    });
+     console.log(distinta)
+  }
+
+  function createAttivazione(event){
+    event.preventDefault()
+    event.stopPropagation()
+   //props.onAdd(distinta);
+   // setDistinta({
+   // typeOfOperation:"",
+   // clientName:"",
+   // notes:""
+   // });
+      axios
+      .post("http://localhost:3001/distinta/add", distinta)
+      .then(response => response.json(response.data));
+
+
+  }
+
 
     return(
         <Container className="inputBox"> 
 
         <h1 className="mt-3">Inserisci un nuovo elemento:</h1>
-        <Form>
+        <Form onSubmit={createAttivazione}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control type="text" placeholder="Cos'hai attivato?" name="typeOfOperation"/>
+              <Form.Control type="text" placeholder="Cos'hai attivato?" name="typeOfOperation" onChange={handleChange} value={distinta.typeOfOperation} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control type="text" placeholder="Nome del cliente" name="client"/>
+              <Form.Control type="text" placeholder="Nome del cliente" name="clientName" onChange={handleChange} value={distinta.clientName} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Control as="textarea" rows={2}  placeholder="Hai delle note aggiuntive?" name="notes"/>
+                <Form.Control as="textarea" rows={2}  placeholder="Hai delle note aggiuntive?" name="notes" onChange={handleChange} value={distinta.notes} />
               </Form.Group>
-              <Button className="btn-lg submitbtn" variant="warning" name="btn-submit" type="submit" onSubmit={createAttivazione}>
+              <Form.Group > 
+              <Button className="btn-lg submitbtn" variant="warning" name="btn-submit" type="submit" >
               Invia
               </Button>
+              </Form.Group>
+
 
         </Form>
 

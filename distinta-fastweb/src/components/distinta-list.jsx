@@ -1,9 +1,22 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table"
+import axios from "axios"
 
 
-function Distinta(props){
+function Distinta(){
+
+  const[report,setReport] = React.useState([])
+
+  React.useEffect(() => {
+    axios
+    .get("http://localhost:3001/distinta/")
+    .then((response) => {
+      setReport(response.data);
+    });
+  },[]);
+ 
+  
     return(
         <Container>
         <h1>Distinta</h1>
@@ -15,17 +28,21 @@ function Distinta(props){
           <th>Attività</th>
           <th>Data</th>
           <th>Distretto</th>
+          <th>Notes</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-       { /* distinta da cliclare in base all'attività all'interno del database*/}
-          <td>1</td>
+        
+       { report.map((report) => {return(  
+          <tr>        
+          <td key={report.id}>{report.id}</td>
           <td>Nome</td>
-          <td>Attività</td>
-          <td>17/04/2022</td>
-          <td>Emisfero</td>
-        </tr>
+          <td>{report.typeOfOperation}</td>
+          <td>{report.data}</td>
+          <td>{report.notes}</td>
+          </tr>
+          )})}
+        
       </tbody>
     </Table>
     </Container>

@@ -18,8 +18,9 @@ module.exports = (function () {
         const username = req.body.username;
         const password = req.body.password;
         const distretto = req.body.distretto;
-        const typeOfOperation = req.body.typeofops;
-        const clientName = req.body.client;
+        const typeOfOperation = req.body.typeOfOperation;
+        const clientName = req.body.clientName;
+        const notes = req.body.notes;
         const date = new Date()
 
         const newDistinta = new Distinta({
@@ -28,6 +29,7 @@ module.exports = (function () {
             distretto,
             typeOfOperation,
             clientName,
+            notes,
             date,
 
         });

@@ -7,7 +7,7 @@ const userSchema = new Schema({
     username: {
         type: String,
         require: true,
-        unique: true,
+        unique: false,
         trim: true,
         minlength: 3,
         
