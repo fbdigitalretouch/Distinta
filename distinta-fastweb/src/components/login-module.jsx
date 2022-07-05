@@ -6,15 +6,6 @@ import {Container,Form,Button} from "react-bootstrap"
 
 
     function Login(){
-  //  
-  //  constructor(props){
-  //    super(props){
-  //      this.state = {
-  //        username:'',
-  //        password:''
-  //      }
-  //    }
-  //  }
 
     return(
         <Container>

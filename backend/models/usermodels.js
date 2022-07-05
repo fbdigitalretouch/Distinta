@@ -8,20 +8,16 @@ const userSchema = new Schema({
         type: String,
         require: true,
         unique: false,
-        trim: true,
         minlength: 3,
         
     },
-    password: {
+    distretto: {
         type: String,
-        require: true,
-        trim: true,
-        minlength: 5,
+        require: true
     },
 
-
-
 });
+
 
 const User = mongoose.model("User", userSchema);
 
