@@ -2,8 +2,6 @@ import axios from "axios"
 import React,{useState} from "react";
 import {Container,Form,Button} from "react-bootstrap"
 
-
-
 function Inserisci(){
 
   const [users,setUsers] = useState([])
@@ -41,9 +39,7 @@ function Inserisci(){
       .post("http://localhost:3001/distinta/add", distinta)
       .then(response => response.json(response.data));
 
-
   }
-
 
     return(
         <Container className="inputBox"> 
@@ -59,7 +55,7 @@ function Inserisci(){
               </Form.Group>
               <Form.Group className="mb-3">
                  <Form.Select aria-label="Default select example">
-                 <option>Seleziona il tuo nome</option>
+                 <option>Seleziona il tuo Nome</option>
                     {users.map(user => {return(<option>{user.username}</option>)})}
                  </Form.Select>
               </Form.Group>
