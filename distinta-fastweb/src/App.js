@@ -10,27 +10,37 @@ import Inserisci from "./components/Inserisci"
 import Logout from "./components/Logout"
 import Direttore from "./components/Direttore"
 import Login from "./components/login-module"
+import { useAuth0 } from "@auth0/auth0-react";
 
-const logged = true;
+
 
 
 // Devo sistemare il login in modo da poter renderizzare condizionalmente i reindirizzamenti solo nel caso in cui 
 // l'utente sia loggato.
 
 function App() {
+
+ 
+  const { loginWithRedirect,isAuthenticated,user } = useAuth0();
+
+
   return (
+
     <div className="App">
+
+
+    
         <Router>
             <Navigationbar/>
-            {logged ? 
+            
+            {isAuthenticated ? 
             <Routes>
 
             <Route exact path="/report" element={<DistintaList/>} />
             <Route path="/inserisci" element={<Inserisci/>} />
-            <Route path="/logout" element={<Logout/>} />
             <Route path="/direttore" element={<Direttore/>} />
             <Route path="/login" element={<Login/>} />
-            </Routes> : <Login/>}
+            </Routes> : <button className='loginButton' onClick={() => loginWithRedirect()}>Log In</button>}
         </Router>
 
     </div>

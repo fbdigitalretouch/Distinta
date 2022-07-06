@@ -17,12 +17,10 @@ function Direttore(){
                </Container>
                    <Navbar.Collapse id="navbarScroll">
                <Container>
-                    <Nav >
-                    <Nav.Item> <NavLink  eventKey="1" as={Link} to="/nuovoUtente">Inserisci Utente</NavLink></Nav.Item>  
-                      <Nav.Item> <NavLink  eventKey="2" as={Link} to="/nuovoDistretto">Inserisci Distretto</NavLink></Nav.Item>   
+                    <Nav > 
                       <Nav.Item> <NavLink  eventKey="3" as={Link} to="/stampaDistinta">Stampa Distinta</NavLink></Nav.Item>     
-                      <Nav.Item> <NavLink  eventKey="4" as={Link} to="/modificaDistinta">Modifica Distinta</NavLink></Nav.Item>     
-                      <Nav.Item> <NavLink  eventKey="5" as={Link} to="/pwdReset">Reset Password</NavLink></Nav.Item>  
+                      <Nav.Item> <NavLink  eventKey="4" as={Link} to="/modificaDistinta">Modifica Distinta</NavLink></Nav.Item>
+                      <Nav.Item> <NavLink  eventKey="2" as={Link} to="/nuovoDistretto">Inserisci Distretto</NavLink></Nav.Item> 
                     </Nav>
                </Container>   
                </Navbar.Collapse>
