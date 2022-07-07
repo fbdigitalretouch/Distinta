@@ -16,10 +16,10 @@ module.exports = (function () {
     })
 
     router.post("/add", (req, res) => {
-        const username = req.body.username;
+
         const distretto = req.body.distretto;
         const newUser = new User({
-            username,
+           
             distretto
         });
 

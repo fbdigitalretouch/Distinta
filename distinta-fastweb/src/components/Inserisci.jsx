@@ -1,9 +1,13 @@
 import axios from "axios"
 import React,{useState} from "react";
 import {Container,Form,Button} from "react-bootstrap"
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Inserisci(){
+  let date = new Date()
+  let option = {day:"numeric",year:"numeric",month:"numeric"}
 
+  const { user } = useAuth0();
   const [users,setUsers] = useState([])
 
   axios.get("http://localhost:3001/user")
@@ -11,9 +15,12 @@ function Inserisci(){
 
 
   const [distinta,setDistinta] = useState({
+    username:"",
+    distretto:"",
     typeOfOperation:"",
     clientName:"",
-    notes:""
+    notes:"",
+    date: ""
 
   })
 
@@ -22,13 +29,15 @@ function Inserisci(){
     const { name, value } = event.target;
 
     setDistinta((prevNote) => {
+      console.log(user.name)
       return {
         ...prevNote,
-        [name]: value
+        [name]: value,
+        date: date.toLocaleDateString("it-IT",option)
+        
       };
       
     });
-     console.log(distinta)
   }
 
   function createAttivazione(event){
@@ -37,28 +46,22 @@ function Inserisci(){
 
       axios
       .post("http://localhost:3001/distinta/add", distinta)
-      .then(response => response.json(response.data));
+      .then(response => alert("Distinta aggiunta " + user.name));
 
   }
 
     return(
         <Container className="inputBox"> 
 
-        <h1 className="mt-3">Inserisci un nuovo elemento:</h1>
+        <h1 className="mt-3">Ciao {user.name}</h1>
              <Form onSubmit={createAttivazione}>
               <Form.Group className="mb-3">
-                 <Form.Select aria-label="Default select example">
+                 <Form.Select aria-label="Default select example" onChange={handleChange} name="distretto"> 
                  <option>Seleziona il tuo Distretto</option>
-                {users.map(user => {return(<option>{user.distretto}</option>)})}
-
+                {users.map(username => {return(<option value={username.distretto}>{username.distretto}</option>)})}
               </Form.Select>
               </Form.Group>
-              <Form.Group className="mb-3">
-                 <Form.Select aria-label="Default select example">
-                 <option>Seleziona il tuo Nome</option>
-                    {users.map(user => {return(<option>{user.username}</option>)})}
-                 </Form.Select>
-              </Form.Group>
+
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                   <Form.Control type="text" placeholder="Cos'hai attivato?" name="typeOfOperation" onChange={handleChange} value={distinta.typeOfOperation} />
               </Form.Group>
@@ -85,3 +88,10 @@ function Inserisci(){
 }
 
 export default Inserisci;
+
+    //         <Form.Group className="mb-3">
+    //            <Form.Select aria-label="Default select example">
+    //            <option>Seleziona il tuo Nome</option>
+    //               {users.map(user => {return(<option>{user.username}</option>)})}
+    //            </Form.Select>
+    //         </Form.Group>\*

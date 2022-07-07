@@ -12,7 +12,7 @@ function Distinta(){
     axios
     .get("http://localhost:3001/distinta/")
     .then((response) => {
-      setReport(response.data);
+      setReport(response.data); console.log(response.data)
     });
   },[]);
  
@@ -28,7 +28,8 @@ function Distinta(){
           <th>Attività</th>
           <th>Data</th>
           <th>Distretto</th>
-          <th>Notes</th>
+          <th>Note</th>
+          <th>Cliente</th>
         </tr>
       </thead>
       <tbody>
@@ -36,10 +37,12 @@ function Distinta(){
        { report.map((report) => {return(  
           <tr>        
           <td key={report.id}>{report.id}</td>
-          <td>Nome</td>
+          <td>{report.username}</td>
           <td>{report.typeOfOperation}</td>
-          <td>{report.data}</td>
+          <td>{report.date}</td>
+          <td>{report.distretto}</td>
           <td>{report.notes}</td>
+          <td>{report.clientName}</td>
           </tr>
           )})}
         

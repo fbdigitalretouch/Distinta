@@ -7,6 +7,7 @@ import {BrowserRouter as Router,Routes,Route,} from "react-router-dom";
 import Navigationbar from './components/navbar';
 import DistintaList from "./components/distinta-list"
 import Inserisci from "./components/Inserisci"
+import NuovoDistretto from "./components/componentsDirettore/nuovoDistretto"
 import Logout from "./components/Logout"
 import Direttore from "./components/Direttore"
 import Login from "./components/login-module"
@@ -39,6 +40,7 @@ function App() {
             <Route exact path="/report" element={<DistintaList/>} />
             <Route path="/inserisci" element={<Inserisci/>} />
             <Route path="/direttore" element={<Direttore/>} />
+            <Route path="/direttore/nuovoDistretto" element={<NuovoDistretto/>} />
             <Route path="/login" element={<Login/>} />
             </Routes> : <button className='loginButton' onClick={() => loginWithRedirect()}>Log In</button>}
         </Router>

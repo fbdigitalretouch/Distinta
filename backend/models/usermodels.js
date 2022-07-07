@@ -4,18 +4,11 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
 
-    username: {
-        type: String,
-        require: true,
-        unique: false,
-        minlength: 3,
-        
-    },
     distretto: {
-        type: String,
-        require: true
-    },
-
+        type:String,
+        unique:true,
+        
+    }
 });
 
 

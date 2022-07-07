@@ -3,18 +3,16 @@ const userSchema = require("./usermodels");
 
 const Schema = mongoose.Schema;
 
+let date = new Date()
+
 const distintaSchema = new Schema({
 
-    username: userSchema.userSchema,
+    username: String,
+    distretto: String,
     typeOfOperation: String,
     clientName: String,
     notes:String,
-    date:Date,
-}, {
-     timestamps: {
-    createdAt: 'created_at', // Use `created_at` to store the created date
-    updatedAt: 'updated_at' // and `updated_at` to store the last updated date
-  }
+    date:String
 });
 
 
