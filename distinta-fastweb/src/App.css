@@ -27,5 +27,23 @@
   margin-top: 40vh ;
 }
 
+.submitButton{
+  
+  color: #523100;
+  background-color: #ffbb00;
+  border-radius: 50px;
+  border-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  width: 8em;
+  font-size: large;
+  font-weight: 600;
+  margin:auto;
+  margin-top: 10vh ;
+
+}
+
 
 

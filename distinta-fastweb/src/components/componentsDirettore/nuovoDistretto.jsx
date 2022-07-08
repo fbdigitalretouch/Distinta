@@ -42,7 +42,7 @@ function NuovoDistretto(){
                 <Form.Group>
                     <Form.Control type="text" placeholder="Nuovo Distretto" name="distretto" onChange={handleChange} value={distretto.distretto} />
                 </Form.Group>
-                <Button className="btn-lg submitbtn" variant="warning" name="btn-submit" type="submit" >Invia</Button>
+                <Button className="btn-lg submitbtn submitButton" variant="warning" name="btn-submit" type="submit" >Invia</Button>
             </Form>
 
         </Container>

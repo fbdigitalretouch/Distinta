@@ -4,18 +4,17 @@ import {Container,Form,Button} from "react-bootstrap"
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Inserisci(){
-  let date = new Date()
-  let option = {day:"numeric",year:"numeric",month:"numeric"}
 
   const { user } = useAuth0();
-  const [users,setUsers] = useState([])
+  const [distretto,setDistretto] = useState([])
 
   axios.get("http://localhost:3001/user")
-      .then(response => {setUsers(response.data)})
+      .then(response => {setDistretto(response.data)})
 
 
   const [distinta,setDistinta] = useState({
-    username:"",
+    index:"",
+    username:user.name,
     distretto:"",
     typeOfOperation:"",
     clientName:"",
@@ -29,11 +28,9 @@ function Inserisci(){
     const { name, value } = event.target;
 
     setDistinta((prevNote) => {
-      console.log(user.name)
       return {
         ...prevNote,
         [name]: value,
-        date: date.toLocaleDateString("it-IT",option)
         
       };
       
@@ -53,16 +50,17 @@ function Inserisci(){
     return(
         <Container className="inputBox"> 
 
-        <h1 className="mt-3">Ciao {user.name}</h1>
+        <h1 className="mt-3">Ciao <span name="username" value={user.name}>{user.name}</span></h1>
              <Form onSubmit={createAttivazione}>
               <Form.Group className="mb-3">
                  <Form.Select aria-label="Default select example" onChange={handleChange} name="distretto"> 
                  <option>Seleziona il tuo Distretto</option>
-                {users.map(username => {return(<option value={username.distretto}>{username.distretto}</option>)})}
+                {distretto.map(distretto => {return(<option value={distretto.distretto}>{distretto.distretto}</option>)})}
               </Form.Select>
               </Form.Group>
 
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                 
                   <Form.Control type="text" placeholder="Cos'hai attivato?" name="typeOfOperation" onChange={handleChange} value={distinta.typeOfOperation} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

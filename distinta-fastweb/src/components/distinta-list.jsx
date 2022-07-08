@@ -6,13 +6,13 @@ import axios from "axios"
 
 function Distinta(){
 
-  const[report,setReport] = React.useState([])
+  const[reports,setReports] = React.useState([])
 
   React.useEffect(() => {
     axios
     .get("http://localhost:3001/distinta/")
     .then((response) => {
-      setReport(response.data); console.log(response.data)
+      setReports(response.data); console.log(response.data)
     });
   },[]);
  
@@ -34,9 +34,9 @@ function Distinta(){
       </thead>
       <tbody>
         
-       { report.map((report) => {return(  
+       { reports.slice(0).reverse().map((report) => {return(  
           <tr>        
-          <td key={report.id}>{report.id}</td>
+          <td key={report.id}>{reports.indexOf(report) + 1}</td>
           <td>{report.username}</td>
           <td>{report.typeOfOperation}</td>
           <td>{report.date}</td>
