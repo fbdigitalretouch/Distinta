@@ -8,7 +8,7 @@ import Navigationbar from './components/navbar';
 import DistintaList from "./components/distinta-list"
 import Inserisci from "./components/Inserisci"
 import NuovoDistretto from "./components/componentsDirettore/nuovoDistretto"
-import Logout from "./components/Logout"
+import ModificaDistinta from "./components/componentsDirettore/modificaDistinta"
 import Direttore from "./components/Direttore"
 import Login from "./components/login-module"
 import { useAuth0 } from "@auth0/auth0-react";
@@ -22,7 +22,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 function App() {
 
  
-  const { loginWithRedirect,isAuthenticated,user } = useAuth0();
+  const { loginWithRedirect,isAuthenticated } = useAuth0();
 
 
   return (
@@ -41,6 +41,7 @@ function App() {
             <Route path="/inserisci" element={<Inserisci/>} />
             <Route path="/direttore" element={<Direttore/>} />
             <Route path="/direttore/nuovoDistretto" element={<NuovoDistretto/>} />
+            <Route path="/direttore/modificaDistinta" element={<ModificaDistinta/>} />
             <Route path="/login" element={<Login/>} />
             </Routes> : <button className='loginButton' onClick={() => loginWithRedirect()}>Log In</button>}
         </Router>

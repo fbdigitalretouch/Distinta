@@ -19,7 +19,7 @@ function Direttore(){
                <Container>
                     <Nav > 
                       <Nav.Item> <NavLink  eventKey="3" as={Link} to="/stampaDistinta">Stampa Distinta</NavLink></Nav.Item>     
-                      <Nav.Item> <NavLink  eventKey="4" as={Link} to="/componentsDirettore/modificaDistinta">Modifica Distinta</NavLink></Nav.Item>
+                      <Nav.Item> <NavLink  eventKey="4" as={Link} to="/direttore/modificaDistinta">Modifica Distinta</NavLink></Nav.Item>
                       <Nav.Item> <NavLink  eventKey="2" as={Link} to="/direttore/nuovoDistretto">Inserisci Distretto</NavLink></Nav.Item> 
                     </Nav>
                </Container>   
