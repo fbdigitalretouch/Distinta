@@ -14,6 +14,12 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err))
     })
 
+    router.get("/select", (req, res) => {
+        Distinta.find(req.body.choise)
+            .then(distintas => res.json(distintas) )
+            .catch(err => res.status(400).json("Error : " + err))
+        })
+
     router.post("/add", (req, res) => {
         
         const index = req.body.index;
@@ -40,10 +46,8 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err));
     });
 
-    router.post("/delete/:id", (req, res) => {
-
-        
-       Distinta.findOneAndDelete((req.param.id), (err) => {
+    router.delete("/delete", (req, res) => {        
+       Distinta.findOneAndDelete((req.body.deletebtn), (err) => {
             if (err) {
                 console.log(err)
             } else {

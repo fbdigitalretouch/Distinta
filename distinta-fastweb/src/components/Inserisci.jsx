@@ -10,6 +10,7 @@ function Inserisci(){
 
   axios.get("http://localhost:3001/user")
       .then(response => {setDistretto(response.data)})
+      .catch(error => {console.log('There was an error!', error);})
 
 
   const [distinta,setDistinta] = useState({
@@ -43,7 +44,8 @@ function Inserisci(){
 
       axios
       .post("http://localhost:3001/distinta/add", distinta)
-      .then(response => alert("Distinta aggiunta " + user.name));
+      .then(response => alert("Distinta aggiunta " + user.name))
+      .catch(error => {console.log('There was an error!', error);});
 
   }
 
