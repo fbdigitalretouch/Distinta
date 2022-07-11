@@ -14,6 +14,8 @@ const [distrettos,setDistretto] = useState([]);
 const [deleted,setDeleted] = useState("");
 const [choise,setChoise] = useState("")
 
+
+
    useEffect(() => {
     axios
         .get("http://localhost:3001/distinta")
@@ -38,13 +40,14 @@ function handleChange(e){
       [name]:value
     }
   })
-  console.log(choise)
-  axios
-       .get("http://localhost3001/distinta",choise)
-       .then(response => setDistinta(response.data))
-       .catch(error => {console.log('There was an error!', error)})
-
-
+  
+  setDistinta((prev) => {
+      const choseReport = reports.filter(e=> (e.distretto === choise.distretto));
+       console.log(choseReport)
+      return(choseReport)
+      
+   }  
+  )
 }
 
 function editOne(){
@@ -93,9 +96,7 @@ return(
          <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="users"> 
             <option>Seleziona User</option>
             <option>Tutti</option>
-            {reports.map(distretto => { 
-           
-             return(<option value={distretto.username}>{distretto.username}</option>)})}
+            {reports.map(distretto => {return(<option value={distretto.username}>{distretto.username}</option>)})}
          </Form.Select>
          </Form.Group>
          </Form>

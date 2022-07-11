@@ -14,8 +14,8 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err))
     })
 
-    router.get("/select", (req, res) => {
-        Distinta.find(req.body.choise)
+    router.get("/:id", (req, res) => {
+        Distinta.find(req.params.id)
             .then(distintas => res.json(distintas) )
             .catch(err => res.status(400).json("Error : " + err))
         })
