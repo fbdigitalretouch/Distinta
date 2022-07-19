@@ -13,11 +13,10 @@ module.exports = (function () {
             .then(distintas => res.json(distintas) )
             .catch(err => res.status(400).json("Error : " + err))
     })
-
-    router.get("/:id", (req, res) => {
-        Distinta.find(req.params.id)
+        router.get("/:id", (req, res) => {
+        Distinta.find(req.params.id,(err) => {if(err){console.log(err)}})
             .then(distintas => res.json(distintas) )
-            .catch(err => res.status(400).json("Error : " + err))
+            .catch(err => res.status(400).json("Error : " + err));
         })
 
     router.post("/add", (req, res) => {

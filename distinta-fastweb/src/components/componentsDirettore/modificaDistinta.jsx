@@ -1,9 +1,9 @@
 import '../../App.css'
 import axios from "axios"
 import React,{useState,useEffect} from "react";
-import {Container,Form,Table,} from "react-bootstrap"
+import {Container,Form,Table,Button} from "react-bootstrap"
 import Direttore from "../Direttore"
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from "@mui/icons-material/Edit";
 
 
@@ -16,44 +16,59 @@ const [choise,setChoise] = useState("")
 
 
 
-   useEffect(() => {
-    axios
-        .get("http://localhost:3001/distinta")
-        .then(response => setDistinta(response.data))
-        .catch(error => {console.log('There was an error!', error)})
-   },[]);
-            
- useEffect(() => {
-    axios
-        .get("http://localhost:3001/user")
-        .then(response => setDistretto(response.data))
-        .catch(error => {console.log('There was an error!', error)})
-         },[]);
+  useEffect(() => {
+   axios
+       .get("http://localhost:3001/distinta")
+       .then(response => setDistinta(response.data))
+       .catch(error => {console.log('There was an error!', error)})
+  },[]);
+         
+  useEffect(() => {
+     axios
+         .get("http://localhost:3001/user")
+         .then(response => setDistretto(response.data))
+         .catch(error => {console.log('There was an error!', error)})
+          },[]);
 
+
+
+ //////////////////////////////////////////////////selecting///////////////////////////////////////////////////////
+        
 function handleChange(e){
 
   const {name,value} = e.target;
 
-  setChoise((prev)=>{
-    return{
-      ...prev,
-      [name]:value
-    }
-  })
-  
-  setDistinta((prev) => {
-      const choseReport = reports.filter(e=> (e.distretto === choise.distretto));
-       console.log(choseReport)
-      return(choseReport)
+  setChoise((prevNote) => {
+      return {
+        ...prevNote,
+        [name]: value,
+        
+      };
       
-   }  
-  )
-}
+    })
+} 
+
+
+ function submitChoise(event){
+    event.preventDefault()
+
+      axios
+        .get("http://localhost:3001/distinta/")
+        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto))})
+        .catch(error => {console.log('There was an error!', error)})
+  
+ }   
+//////////////////////////////////////////////////edit///////////////////////////////////////////////////////
+
+
 
 function editOne(){
   axios
       .post()
 }
+
+//////////////////////////////////////////////////delete///////////////////////////////////////////////////////
+
 
 function deleteOne(e){
 
@@ -87,7 +102,7 @@ return(
     <Container>
         <h1> Modifica Distinta</h1>
 
-    <Form>
+    <Form onSubmit={submitChoise}>
          <Form.Group className="mb-3" name="choise" value={choise}>
             <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="distretto"> 
             <option>Seleziona Distretto</option>
@@ -99,6 +114,11 @@ return(
             {reports.map(distretto => {return(<option value={distretto.username}>{distretto.username}</option>)})}
          </Form.Select>
          </Form.Group>
+          <Form.Group > 
+                  <Button className="btn-lg submitbtn" variant="warning" name="btn-submit" type="submit" >
+              Invia
+              </Button>
+              </Form.Group>
          </Form>
 
     <Table bordered hover>

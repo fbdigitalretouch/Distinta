@@ -1,6 +1,6 @@
 import React from "react";
 import { Nav, Navbar, NavLink,Container } from "react-bootstrap";
-import { Link } from "react-router-dom"
+import { Link,useParams } from "react-router-dom"
 
 
 
@@ -18,9 +18,9 @@ function Direttore(){
                    <Navbar.Collapse id="navbarScroll">
                <Container>
                     <Nav > 
-                      <Nav.Item> <NavLink  eventKey="3" as={Link} to="/stampaDistinta">Stampa Distinta</NavLink></Nav.Item>     
-                      <Nav.Item> <NavLink  eventKey="4" as={Link} to="/direttore/modificaDistinta">Modifica Distinta</NavLink></Nav.Item>
-                      <Nav.Item> <NavLink  eventKey="2" as={Link} to="/direttore/nuovoDistretto">Inserisci Distretto</NavLink></Nav.Item> 
+                      <Nav.Item> <NavLink  eventKey="1" as={Link} to="/stampaDistinta">Stampa Distinta</NavLink></Nav.Item>     
+                      <Nav.Item> <NavLink  eventKey="2" as={Link} to="/direttore/modifica">Modifica Distinta</NavLink></Nav.Item>
+                      <Nav.Item> <NavLink  eventKey="4" as={Link} to="/direttore/nuovoDistretto">Inserisci Distretto</NavLink></Nav.Item> 
                     </Nav>
                </Container>   
                </Navbar.Collapse>

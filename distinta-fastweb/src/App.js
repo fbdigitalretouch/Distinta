@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import {BrowserRouter as Router,Routes,Route,} from "react-router-dom";
+import {BrowserRouter as Router,Routes,Route,useParams} from "react-router-dom";
 
 import Navigationbar from './components/navbar';
 import DistintaList from "./components/distinta-list"
@@ -37,11 +37,13 @@ function App() {
             {isAuthenticated ? 
             <Routes>
 
+            
             <Route exact path="/report" element={<DistintaList/>} />
             <Route path="/inserisci" element={<Inserisci/>} />
             <Route path="/direttore" element={<Direttore/>} />
             <Route path="/direttore/nuovoDistretto" element={<NuovoDistretto/>} />
-            <Route path="/direttore/modificaDistinta" element={<ModificaDistinta/>} />
+            <Route path="/direttore/modifica" element={<ModificaDistinta/>} />
+            <Route path="/direttore/modifica/:id" element={<ModificaDistinta/>} />
             <Route path="/login" element={<Login/>} />
             </Routes> : <button className='loginButton' onClick={() => loginWithRedirect()}>Log In</button>}
         </Router>

@@ -18,9 +18,12 @@ mongoose.connect(uri);
 
 const distintaRouting = require("./routes/distinta")
 const userRouting = require("./routes/user")
+const modificaRouting = require("./routes/modifica")
+
 
 app.use("/distinta",distintaRouting);
-app.use("/user",userRouting)
+app.use("/user",userRouting);
+app.use("/modifica",modificaRouting);
 
 app.listen(port,()=>{console.log("Server is running on port " + port);
 })
