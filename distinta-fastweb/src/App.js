@@ -1,6 +1,8 @@
 import './App.css';
-import React from "react";
+import React, {useState,useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import axios from "axios"
 
 import {BrowserRouter as Router,Routes,Route,useParams} from "react-router-dom";
 
@@ -21,8 +23,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
 
- 
-  const { loginWithRedirect,isAuthenticated } = useAuth0();
+
+
+  const { loginWithRedirect,isAuthenticated,user } = useAuth0();
+
+  
 
 
   return (
@@ -43,7 +48,6 @@ function App() {
             <Route path="/direttore" element={<Direttore/>} />
             <Route path="/direttore/nuovoDistretto" element={<NuovoDistretto/>} />
             <Route path="/direttore/modifica" element={<ModificaDistinta/>} />
-            <Route path="/direttore/modifica/:id" element={<ModificaDistinta/>} />
             <Route path="/login" element={<Login/>} />
             </Routes> : <button className='loginButton' onClick={() => loginWithRedirect()}>Log In</button>}
         </Router>

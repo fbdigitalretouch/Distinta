@@ -1,5 +1,5 @@
 const express = require("express");
-let User = require("../models/usermodels");
+let Utente = require("../models/utentimodel");
 
 
     var router = express.Router();
@@ -10,28 +10,29 @@ module.exports = (function () {
 
 
     router.get("/", (req, res) => {
-        User.find()
+        Utente.find()
             .then(users => res.json(users))
             .catch(err => res.status(400).json("Error : " + err))
     })
 
     router.post("/add", (req, res) => {
 
-        const distretto = req.body.distretto;
-        const newUser = new User({
-           
-            distretto
+        const utente = req.body.username;
+        const newUtente = new Utente({
+            username:utente
         });
 
-        newUser.save()
-            .then(() => res.json("User Added!"))
+        console.log(newUtente)
+
+        newUtente.save()
+            .then(() => res.json("Utente Aggiunto!"))
             .catch(err => res.status(400).json("Error : " + err));
     });
 
     router.post("/delete/:id", (req, res) => {
 
         
-        User.findOneAndDelete((req.param.id), (err) => {
+        Utente.findOneAndDelete((req.param.id), (err) => {
             if (err) {
                 console.log(err)
             } else {

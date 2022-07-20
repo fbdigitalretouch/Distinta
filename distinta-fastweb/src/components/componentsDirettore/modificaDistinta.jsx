@@ -13,6 +13,7 @@ const [reports,setDistinta] = useState([]);
 const [distrettos,setDistretto] = useState([]);
 const [deleted,setDeleted] = useState("");
 const [choise,setChoise] = useState("")
+const [utentis,setUtenti] = useState([])
 
 
 
@@ -27,6 +28,13 @@ const [choise,setChoise] = useState("")
      axios
          .get("http://localhost:3001/user")
          .then(response => setDistretto(response.data))
+         .catch(error => {console.log('There was an error!', error)})
+          },[]);
+
+  useEffect(() => {
+     axios
+         .get("http://localhost:3001/utenti")
+         .then(response => setUtenti(response.data))
          .catch(error => {console.log('There was an error!', error)})
           },[]);
 
@@ -111,7 +119,7 @@ return(
          <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="users"> 
             <option>Seleziona User</option>
             <option>Tutti</option>
-            {reports.map(distretto => {return(<option value={distretto.username}>{distretto.username}</option>)})}
+            {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
          </Form.Select>
          </Form.Group>
           <Form.Group > 
