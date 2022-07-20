@@ -1,5 +1,5 @@
 import axios from "axios"
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {Container,Form,Button} from "react-bootstrap"
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -8,18 +8,14 @@ function Inserisci(){
   const { user } = useAuth0();
   const [distretto,setDistretto] = useState([])
 
-  const [userGoogle,setUserGoogle] = useState()
-  const [users,setUsers] = useState([])
+
+  
 
 
-
+useEffect(() => {
   axios.get("http://localhost:3001/user")
       .then(response => {setDistretto(response.data)})
-      .catch(error => {console.log('There was an error!', error);})
-
-      axios.get("http://localhost:3001/utenti")
-          .then(response => {setUsers(response.data)})
-          .catch(error => {console.log('There was an error!', error);})
+      .catch(error => {console.log('There was an error!', error);},)},[])
 
 
   const [distinta,setDistinta] = useState({
@@ -52,31 +48,12 @@ function Inserisci(){
   function createAttivazione(event){
     event.preventDefault()
     event.stopPropagation()
-    setUserGoogle({username:user.name})
     
 
       axios
       .post("http://localhost:3001/distinta/add", distinta)
       .then(response => alert("Distinta aggiunta " + user.name))
-      .catch(error => {console.log('There was an error!', error);});
-      
-
-      if(users.includes({username:user.name})){
-        console.log("nome presente nel DB")
-      }else{
-
-        console.log(users)
-       axios
-      .post("http://localhost:3001/utenti/add", userGoogle)
-      .then(response => alert("Nuovo utente aggiunto " + user.name))
-      .catch(error => {console.log('There was an error!', error);});
-
-
-      axios.get("http://localhost:3001/utenti")
-          .then(response => {setUsers(response.data)})
-          .catch(error => {console.log('There was an error!', error);})
-
-      }
+      .catch(error => {console.log('There was an error!', error);}, []);
 
   }
 

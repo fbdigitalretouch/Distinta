@@ -6,7 +6,10 @@ const utentiSchema = new Schema({
 
     username: {
         type:String,
-        required:true
+        required:true,
+        _id:false,
+        versioning:false
+
     }
     
 });

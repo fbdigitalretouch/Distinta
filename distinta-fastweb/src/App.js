@@ -13,6 +13,7 @@ import NuovoDistretto from "./components/componentsDirettore/nuovoDistretto"
 import ModificaDistinta from "./components/componentsDirettore/modificaDistinta"
 import Direttore from "./components/Direttore"
 import Login from "./components/login-module"
+import Home from "./components/home"
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -42,7 +43,7 @@ function App() {
             {isAuthenticated ? 
             <Routes>
 
-            
+            <Route exact path="/" element={<Home />}/>
             <Route exact path="/report" element={<DistintaList/>} />
             <Route path="/inserisci" element={<Inserisci/>} />
             <Route path="/direttore" element={<Direttore/>} />

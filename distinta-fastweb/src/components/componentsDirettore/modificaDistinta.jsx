@@ -62,7 +62,7 @@ function handleChange(e){
 
       axios
         .get("http://localhost:3001/distinta/")
-        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto))})
+        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username))})
         .catch(error => {console.log('There was an error!', error)})
   
  }   
@@ -116,7 +116,7 @@ return(
             <option>Seleziona Distretto</option>
             {distrettos.map(distretto => {return(<option value={distretto.distretto}>{distretto.distretto}</option>)})}
          </Form.Select>
-         <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="users"> 
+         <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="username"> 
             <option>Seleziona User</option>
             <option>Tutti</option>
             {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
