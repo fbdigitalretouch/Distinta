@@ -9,9 +9,6 @@ function Inserisci(){
   const [distretto,setDistretto] = useState([])
 
 
-  
-
-
 useEffect(() => {
   axios.get("http://localhost:3001/user")
       .then(response => {setDistretto(response.data)})
