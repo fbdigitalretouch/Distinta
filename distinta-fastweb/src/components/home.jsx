@@ -11,26 +11,29 @@ const [usersLogged,setUsersLogged] = useState([]);
 
 
 useEffect(() => {
-  axios.get("http://localhost:3001/utenti")
+  axios
+      .get("http://localhost:3001/utenti")
       .then(response => {setUsersLogged(response.data)})
       .catch(error => {console.log('There was an error!', error);},)},[])
 
-function onLoad(){
 
-if(usersLogged.filter(e => e.username.includes(user.name) === false)) {   
+ useEffect(() => {
+
+  const mappedUsers = usersLogged.map(e => {return(e.username)})
+if(mappedUsers.includes(user.name) === false) {   
 
 
-  axios.post("http://localhost:3001/utenti", {username:userLogged})
+  axios
+      .post("http://localhost:3001/utenti/add", {"username":user.name})
       .then(response => {"Nuovo utente aggiunto"})
       .catch(error => {console.log('There was an error!', error)});
 
-    } else {
+  } else {
 
-    alert(`Ciao ${userLogged}`)}
+    alert(`Ciao ${user.name}`)
+   }
 
-}
-
-
+},[])
   
 
     return(
