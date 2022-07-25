@@ -12,6 +12,7 @@ function ModificaDistinta(){
 const [reports,setDistinta] = useState([]);
 const [distrettos,setDistretto] = useState([]);
 const [deleted,setDeleted] = useState("");
+const [updated,setUpdated] =useState("");
 const [choise,setChoise] = useState("")
 const [utentis,setUtenti] = useState([])
 
@@ -68,11 +69,33 @@ function handleChange(e){
  }   
 //////////////////////////////////////////////////edit///////////////////////////////////////////////////////
 
+function updateChange(e){
+
+    const {name,value} = e.target;
+
+  setUpdated((prevNote) => {
+      return {
+        ...prevNote,
+        [name]: value,
+        
+      };
+      
+    })
+
+}
 
 
-function editOne(){
+function editOne(e){
+
+  const updateId = e.target.value;
+  
+
   axios
-      .post()
+      .patch("http://localhost:3001/distinta/patch/",updateId, updated)
+      .then(response => alert("Distinta Aggiornata"))
+      .catch(error => console.log('There was an error!', error));
+
+  
 }
 
 //////////////////////////////////////////////////delete///////////////////////////////////////////////////////
@@ -80,7 +103,7 @@ function editOne(){
 
 function deleteOne(e){
 
-  const deleteId = e.target.value
+  const deleteId = e.target.value;
 
   setDeleted(deleteId);
 
@@ -97,7 +120,6 @@ function deleteOne(e){
         .then(response => setDistinta(response.data))
         .catch(error => {console.log('There was an error!', error)})
    
- 
 
  }
 
@@ -123,7 +145,7 @@ return(
          </Form.Select>
          </Form.Group>
           <Form.Group > 
-                  <Button className="btn-lg submitbtn" variant="warning" name="btn-submit" type="submit" >
+                  <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" type="submit" >
               Invia
               </Button>
               </Form.Group>
@@ -142,6 +164,19 @@ return(
         </tr>
       </thead>
       <tbody>
+
+
+       {/*   <tr className="hidden">        
+          <td key={report.id}>{reports.indexOf(report) + 1}</td>
+          <td>{report.username}</td>
+          <td>{report.typeOfOperation}</td>
+          <td>{report.date}</td>
+          <td>{report.distretto}</td>
+          <td>{report.notes}</td>
+          <td>{report.clientName}</td>
+          <td><button name="editbtn" onClick={editOne} value={report._id} className="editbtn"><EditIcon/></button></td>
+          <td><button name="deletebtn" onClick={deleteOne} value={report._id} className="deletebtn">delete</button></td>
+          </tr>*/}
         
        { reports.slice(0).reverse().map((report) => {return(  
           <tr>        
@@ -152,7 +187,7 @@ return(
           <td>{report.distretto}</td>
           <td>{report.notes}</td>
           <td>{report.clientName}</td>
-          <td><button name="editbtn" onClick={editOne} value={report.id} className="editbtn"><EditIcon/></button></td>
+          <td><button name="editbtn" onClick={editOne} value={report._id} className="editbtn"><EditIcon/></button></td>
           <td><button name="deletebtn" onClick={deleteOne} value={report._id} className="deletebtn">delete</button></td>
           </tr>
           )})}

@@ -5,11 +5,6 @@
 .loginH1{
   margin-top: 3%;
 }
-.loginForm {
-  max-width: 200px;
-  margin: auto;
-  margin-top: 3vh;
-}
 
 .loginButton{
   color: #523100;
@@ -41,7 +36,8 @@
   font-size: large;
   font-weight: 600;
   margin:auto;
-  margin-top: 10vh ;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
 
 }
 
@@ -53,3 +49,18 @@
 }
 
 
+.homeDiv{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modifyBtn{
+  margin-top:1vh;
+  margin-bottom: 3vh;
+}
+
+.hidden{
+  display:none
+}

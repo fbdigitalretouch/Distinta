@@ -41,5 +41,17 @@ module.exports = (function () {
         })
     })
 
+    router.patch("/patch/:id",(req,res) =>{
+
+        Utente.findByIdAndUpdate((req.param.id),(err) =>{
+
+            if (err) {console.log(err);}else{
+                console.log("Succesfully updated");
+
+            }
+        })
+
+    })
+
     return router;
 })();

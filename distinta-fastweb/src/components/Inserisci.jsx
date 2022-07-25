@@ -7,11 +7,18 @@ function Inserisci(){
 
   const { user } = useAuth0();
   const [distretto,setDistretto] = useState([])
+  const [usersList,setUserList] = useState([])
 
 
 useEffect(() => {
   axios.get("http://localhost:3001/user")
       .then(response => {setDistretto(response.data)})
+      .catch(error => {console.log('There was an error!', error);},)},[])
+
+useEffect(() => {
+  axios
+      .get("http://localhost:3001/utenti")
+      .then(response => {setUserList(response.data)})
       .catch(error => {console.log('There was an error!', error);},)},[])
 
 
@@ -25,7 +32,11 @@ useEffect(() => {
     date: ""
 
   })
-
+  
+ 
+  const [userLogged,setUserLogged] = useState({
+    username:user.name
+  })
 
   function handleChange(event) {
     event.preventDefault()
@@ -50,6 +61,22 @@ useEffect(() => {
       .post("http://localhost:3001/distinta/add", distinta)
       .then(response => alert("Distinta aggiunta " + user.name))
       .catch(error => {console.log('There was an error!', error);}, []);
+
+const mappedUsers = usersList.map(e => {return(e.username)})
+
+if(mappedUsers.includes(user.name) === false){     
+
+
+
+      axios
+         .post("http://localhost:3001/utenti/add",userLogged)
+         .then(response => alert("Utente Aggiunto " + user.name))
+         .catch(error => {console.log('There was an error!', error);}, []);
+        
+        
+        }else{
+          console.log("Utente già esistente")
+        }
 
   }
 
