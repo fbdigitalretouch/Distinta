@@ -5,6 +5,7 @@ import {Container,Form,Table,Button} from "react-bootstrap"
 import Direttore from "../Direttore"
 // import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from "@mui/icons-material/Edit";
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 
 function ModificaDistinta(){
@@ -15,6 +16,7 @@ const [deleted,setDeleted] = useState("");
 const [updated,setUpdated] =useState("");
 const [choise,setChoise] = useState("")
 const [utentis,setUtenti] = useState([])
+const [classnameChange,setClassnameChange] = useState("hidden")
 
 
 
@@ -84,10 +86,16 @@ function updateChange(e){
 
 }
 
+function classNameChange(){
+  if (classnameChange === "hidden"){
+    setClassnameChange("display")
+  }else{setClassnameChange("hidden")}
+}
+
 
 function editOne(e){
 
-  const updateId = e.target.value;
+  const updateId =  e.target.value;
   
 
   axios
@@ -95,6 +103,7 @@ function editOne(e){
       .then(response => alert("Distinta Aggiornata"))
       .catch(error => console.log('There was an error!', error));
 
+      classNameChange()
   
 }
 
@@ -151,6 +160,21 @@ return(
               </Form.Group>
          </Form>
 
+
+          {/* <Container  onSubmit={editOne}>
+          <Form >
+          <Form.Group className={classNameChange} controlId="exampleForm.ControlInput1">
+             <Form.Control name="typeOfOperation"  type="text" onChange={updateChange} value={updated.typeOfOperation} />
+             <Form.Control name="date"  type="text" onChange={updateChange} value={updated.date} />
+             <Form.Control name="distretto"  type="text" onChange={updateChange} value={updated.distretto} />
+             <Form.Control name="notes"  type="text" onChange={updateChange} value={updated.notes} />
+             <Form.Control name="clientName"  type="text" onChange={updateChange} value={updated.clientName} />
+             <button type="submit" value={updated._id} ><TaskAltIcon className="editbtn" /></button>
+             <button name="deletebtn" onClick={deleteOne} value={updated._id} className="deletebtn">delete</button>
+          </Form.Group>
+          </Form>
+        </Container> */}
+
     <Table bordered hover>
       <thead>
         <tr>
@@ -166,17 +190,10 @@ return(
       <tbody>
 
 
-       {/*   <tr className="hidden">        
-          <td key={report.id}>{reports.indexOf(report) + 1}</td>
-          <td>{report.username}</td>
-          <td>{report.typeOfOperation}</td>
-          <td>{report.date}</td>
-          <td>{report.distretto}</td>
-          <td>{report.notes}</td>
-          <td>{report.clientName}</td>
-          <td><button name="editbtn" onClick={editOne} value={report._id} className="editbtn"><EditIcon/></button></td>
-          <td><button name="deletebtn" onClick={deleteOne} value={report._id} className="deletebtn">delete</button></td>
-          </tr>*/}
+      
+
+          
+
         
        { reports.slice(0).reverse().map((report) => {return(  
           <tr>        
@@ -187,7 +204,7 @@ return(
           <td>{report.distretto}</td>
           <td>{report.notes}</td>
           <td>{report.clientName}</td>
-          <td><button name="editbtn" onClick={editOne} value={report._id} className="editbtn"><EditIcon/></button></td>
+          <td><button name="editbtn" onClick={classNameChange} value={report._id} className="editbtn"><EditIcon/></button></td>
           <td><button name="deletebtn" onClick={deleteOne} value={report._id} className="deletebtn">delete</button></td>
           </tr>
           )})}
