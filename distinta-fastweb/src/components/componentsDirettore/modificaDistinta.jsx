@@ -130,10 +130,10 @@ setClassUpdate(true);
 
  const deleteRow = (id) => {
 
-  axios
-      .delete(`http://localhost:3001/distinta/delete/${id}`)
+      axios
+        .delete(`http://localhost:3001/distinta/delete/${id}`)
 
-          axios
+      axios
         .get("http://localhost:3001/distinta")
         .then(response => setDistinta(response.data))
         .catch(error => {console.log('There was an error!', error)})
