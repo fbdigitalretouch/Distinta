@@ -5,9 +5,6 @@ import { Link,useParams } from "react-router-dom"
 
 
 function Direttore(){
-
-
-
     return(
         
         <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark" >
@@ -25,9 +22,6 @@ function Direttore(){
                </Container>   
                </Navbar.Collapse>
         </Navbar> 
-        
-
-             
 
     )
 

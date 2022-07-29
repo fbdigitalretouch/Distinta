@@ -3,8 +3,9 @@ import axios from "axios"
 import React,{useState,useEffect} from "react";
 import {Container,Form,Table,Button} from "react-bootstrap"
 import Direttore from "../Direttore"
-// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from "@mui/icons-material/Edit";
+import DoneIcon from '@mui/icons-material/Done';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 
@@ -20,7 +21,8 @@ const [utentis,setUtenti] = useState([]);
 
 const [updateId,setUpdateId] = useState("");
 const [updated,setUpdated] = useState({})
-const [classUpdate,setClassUpdate] = useState(false);
+const [onClick,setOnClick] = useState(false);
+const [updateDone,setUpdateDone] = useState()
 
 
 
@@ -78,20 +80,7 @@ function handleChange(e){
   
  }   
 //////////////////////////////////////////////////edit///////////////////////////////////////////////////////
-  function updateChange(e){
-  
-      const {name,value} = e.target;
-  
-    setUpdated((prevNote) => {
-        return {
-          ...prevNote,
-          [name]: value,
-          
-        };
-        
-      })
-   
- }
+
 //   
 //   function classNameChange(){
 //     if (classnameChange === "hidden"){
@@ -121,22 +110,39 @@ const updateData = (id) => {
 
 setUpdateId(id);
 
-setClassUpdate(true);
-
+setOnClick(true);
 }
+
+function promptAction(e){
+  
+    const {name,value} = e.target;
+  
+    setUpdated((prevNote) => {
+        return {
+          ...prevNote,
+          [name]: value,
+          
+        };
+        
+      })
+   
+ }
+
 
 //////////////////////////////////////////////////delete///////////////////////////////////////////////////////
 
 
- const deleteRow = (id) => {
+ const deleteRow = async (id) => {
 
       axios
         .delete(`http://localhost:3001/distinta/delete/${id}`)
-
-      axios
-        .get("http://localhost:3001/distinta")
-        .then(response => setDistinta(response.data))
+        .then( await
+               axios
+               .get("http://localhost:3001/distinta")
+               .then( response => setDistinta(response.data))
+               .catch(error => {console.log('There was an error!', error)}))
         .catch(error => {console.log('There was an error!', error)})
+      
  }
  
 
@@ -187,14 +193,17 @@ return(
        { reports.slice(0).reverse().map((report) => {return(  
           <tr>        
           <td key={report.id}>{reports.indexOf(report) + 1}</td>
-          <td>{report.username}</td>
-          <td>{report.typeOfOperation}</td>
-          <td>{report.date}</td>
-          <td>{report.distretto}</td>
-          <td>{report.notes}</td>
-          <td>{report.clientName}</td>
-          <td><button name="editbtn" onClick={() => {updateData(report._id)}} value={report._id} className="editbtn"><EditIcon/></button></td>
-          <td><button name="deletebtn" onClick={() => {deleteRow(report._id)}} value={report._id} className="deletebtn">delete</button></td>
+          <td onClick={promptAction} >{report.username}</td>
+          <td onClick={promptAction} >{report.typeOfOperation}</td>
+          <td onClick={promptAction} >{report.date}</td>
+          <td onClick={promptAction} >{report.distretto}</td>
+          <td onClick={promptAction} >{report.notes}</td>
+          <td onClick={promptAction} >{report.clientName}</td> 
+          <td onClick={promptAction} ><button  className="editbtn">{ 
+            !onClick ? <EditIcon name="editbtn" onClick={() => {updateData(report._id)}} value={report._id}/> :
+             <DoneIcon onClick={() => {updateDone(report._id)}}/> 
+             }</button></td>
+          <td><button className="deletebtn"><DeleteForeverIcon  name="deletebtn" onClick={() => {deleteRow(report._id)}} value={report._id} /></button></td>
           </tr>
           )})}
         
