@@ -29,21 +29,19 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err));
     });
 
-    router.post("/delete/:id", (req, res) => {
 
-        
-        Utente.findOneAndDelete((req.param.id), (err) => {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log("succesfully deleted");
-            }
-        })
+
+    router.delete("/delete/:id", async (req, res) => {
+        const id = req.params.id;
+        await Utente.findByIdAndDelete(id).exec()
+        res.send("Item Deleted")
+
     })
+
 
     router.patch("/patch/:id",(req,res) =>{
 
-        Utente.findByIdAndUpdate((req.param.id),(err) =>{
+        Utente.findByIdAndUpdate((req.params.id),(err) =>{
 
             if (err) {console.log(err);}else{
                 console.log("Succesfully updated");

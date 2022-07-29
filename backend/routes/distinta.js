@@ -41,14 +41,11 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err));
     });
 
-    router.delete("/delete", (req, res) => {        
-       Distinta.findOneAndDelete((req.body.deletebtn), (err) => {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log("succesfully deleted");
-            }
-        })
+    router.delete("/delete/:id", async (req, res) => {
+        const id = req.params.id;
+        await Distinta.findByIdAndDelete(id).exec()
+        console.log(`Item ${id} deleted`)
+
     })
 
     return router;

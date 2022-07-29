@@ -13,10 +13,18 @@ function ModificaDistinta(){
 const [reports,setDistinta] = useState([]);
 const [distrettos,setDistretto] = useState([]);
 const [deleted,setDeleted] = useState("");
-const [updated,setUpdated] =useState("");
-const [choise,setChoise] = useState("")
-const [utentis,setUtenti] = useState([])
-const [classnameChange,setClassnameChange] = useState("hidden")
+const [choise,setChoise] = useState("");
+const [utentis,setUtenti] = useState([]);
+
+/////////////////////////////////////////////////
+
+const [updateId,setUpdateId] = useState("");
+const [updated,setUpdated] = useState({})
+const [classUpdate,setClassUpdate] = useState(false);
+
+
+
+
 
 
 
@@ -70,67 +78,67 @@ function handleChange(e){
   
  }   
 //////////////////////////////////////////////////edit///////////////////////////////////////////////////////
-
-function updateChange(e){
-
-    const {name,value} = e.target;
-
-  setUpdated((prevNote) => {
-      return {
-        ...prevNote,
-        [name]: value,
+  function updateChange(e){
+  
+      const {name,value} = e.target;
+  
+    setUpdated((prevNote) => {
+        return {
+          ...prevNote,
+          [name]: value,
+          
+        };
         
-      };
-      
-    })
+      })
+   
+ }
+//   
+//   function classNameChange(){
+//     if (classnameChange === "hidden"){
+//       setClassnameChange("display")
+//     }else{setClassnameChange("hidden")}
+//   }
+//   
+//   
+//   function editOne(e){
+//   
+//     const updateId =  e.target.value;
+//     
+//   
+//     axios
+//         .patch("http://localhost:3001/distinta/patch/",updateId, updated)
+//         .then(response => alert("Distinta Aggiornata"))
+//         .catch(error => console.log('There was an error!', error));
+//   
+//         classNameChange()
+//     
+//   }
+//   
+//   
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}
+const updateData = (id) => {
 
-function classNameChange(){
-  if (classnameChange === "hidden"){
-    setClassnameChange("display")
-  }else{setClassnameChange("hidden")}
-}
+setUpdateId(id);
 
+setClassUpdate(true);
 
-function editOne(e){
-
-  const updateId =  e.target.value;
-  
-
-  axios
-      .patch("http://localhost:3001/distinta/patch/",updateId, updated)
-      .then(response => alert("Distinta Aggiornata"))
-      .catch(error => console.log('There was an error!', error));
-
-      classNameChange()
-  
 }
 
 //////////////////////////////////////////////////delete///////////////////////////////////////////////////////
 
 
-function deleteOne(e){
+ const deleteRow = (id) => {
 
-  const deleteId = e.target.value;
-
-  setDeleted(deleteId);
-
- 
   axios
-      .delete("http://localhost:3001/distinta/delete",deleted)
-      .then(response => setDistinta((prevvvalue)=>{return{...prevvvalue}}),alert(`${deleted} deleted succesfully`))
-      .catch(error => {console.log('There was an error!', error);
-    })
+      .delete(`http://localhost:3001/distinta/delete/${id}`)
 
-       
-    axios
+          axios
         .get("http://localhost:3001/distinta")
         .then(response => setDistinta(response.data))
         .catch(error => {console.log('There was an error!', error)})
-   
-
  }
+ 
 
 //////////////////////////////////////////////////renderpage///////////////////////////////////////////////////////
 
@@ -161,20 +169,6 @@ return(
          </Form>
 
 
-          {/* <Container  onSubmit={editOne}>
-          <Form >
-          <Form.Group className={classNameChange} controlId="exampleForm.ControlInput1">
-             <Form.Control name="typeOfOperation"  type="text" onChange={updateChange} value={updated.typeOfOperation} />
-             <Form.Control name="date"  type="text" onChange={updateChange} value={updated.date} />
-             <Form.Control name="distretto"  type="text" onChange={updateChange} value={updated.distretto} />
-             <Form.Control name="notes"  type="text" onChange={updateChange} value={updated.notes} />
-             <Form.Control name="clientName"  type="text" onChange={updateChange} value={updated.clientName} />
-             <button type="submit" value={updated._id} ><TaskAltIcon className="editbtn" /></button>
-             <button name="deletebtn" onClick={deleteOne} value={updated._id} className="deletebtn">delete</button>
-          </Form.Group>
-          </Form>
-        </Container> */}
-
     <Table bordered hover>
       <thead>
         <tr>
@@ -189,11 +183,6 @@ return(
       </thead>
       <tbody>
 
-
-      
-
-          
-
         
        { reports.slice(0).reverse().map((report) => {return(  
           <tr>        
@@ -204,8 +193,8 @@ return(
           <td>{report.distretto}</td>
           <td>{report.notes}</td>
           <td>{report.clientName}</td>
-          <td><button name="editbtn" onClick={classNameChange} value={report._id} className="editbtn"><EditIcon/></button></td>
-          <td><button name="deletebtn" onClick={deleteOne} value={report._id} className="deletebtn">delete</button></td>
+          <td><button name="editbtn" onClick={() => {updateData(report._id)}} value={report._id} className="editbtn"><EditIcon/></button></td>
+          <td><button name="deletebtn" onClick={() => {deleteRow(report._id)}} value={report._id} className="deletebtn">delete</button></td>
           </tr>
           )})}
         
