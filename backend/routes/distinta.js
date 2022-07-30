@@ -48,5 +48,26 @@ module.exports = (function () {
 
     })
 
+    router.put("/update/:id", async (req,res) => {
+        const id = req.params.id;
+        const newDistretto = req.body.newDistretto;
+        const newDate = req.body.newDate;
+        const newAttivazione = req.body.newAttivazione;
+        const newNote = req.body.newNote;
+        const newClientName = req.body.newClientName;
+
+        await Distinta.findById(id, (error,distintaToUpdate) =>{
+                distintaToUpdate.distretto = newDistretto;
+                distintaToUpdate.date = newDate;
+                distintaToUpdate.typeOfOperation = newAttivazione;
+                distintaToUpdate.notes = newNote;
+                distintaToUpdate.clientName = newClientName;
+
+                distintaToUpdate.save()
+        })
+        .catch((err) => {if(err){console.log(err)}})
+
+    })
+
     return router;
 })();
