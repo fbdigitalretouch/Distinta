@@ -68,3 +68,8 @@
 .display{
   display: block;
 }
+
+.tableDistinta{
+  max-width: 95%;
+  margin:auto;
+}

@@ -4,9 +4,9 @@ import React,{useState,useEffect} from "react";
 import {Container,Form,Table,Button} from "react-bootstrap"
 import Direttore from "../Direttore"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from '@mui/icons-material/Done';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import ModalMod from "./modal"
 
 
 function ModificaDistinta(){
@@ -81,31 +81,6 @@ function handleChange(e){
  }   
 //////////////////////////////////////////////////edit///////////////////////////////////////////////////////
 
-//   
-//   function classNameChange(){
-//     if (classnameChange === "hidden"){
-//       setClassnameChange("display")
-//     }else{setClassnameChange("hidden")}
-//   }
-//   
-//   
-//   function editOne(e){
-//   
-//     const updateId =  e.target.value;
-//     
-//   
-//     axios
-//         .patch("http://localhost:3001/distinta/patch/",updateId, updated)
-//         .then(response => alert("Distinta Aggiornata"))
-//         .catch(error => console.log('There was an error!', error));
-//   
-//         classNameChange()
-//     
-//   }
-//   
-//   
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 const updateData = (id) => {
 
 setUpdateId(id);
@@ -152,7 +127,7 @@ return(
 
     <div>
     <Direttore/>
-    <Container>
+    <Container fluid className="tableDistinta">
         <h1> Modifica Distinta</h1>
 
     <Form onSubmit={submitChoise}>
@@ -174,7 +149,8 @@ return(
               </Form.Group>
          </Form>
 
-
+    </Container>
+    <Container fluid className="tableDistinta">
     <Table bordered hover>
       <thead>
         <tr>
@@ -200,7 +176,7 @@ return(
           <td onClick={promptAction} >{report.notes}</td>
           <td onClick={promptAction} >{report.clientName}</td> 
           <td onClick={promptAction} ><button  className="editbtn">{ 
-            !onClick ? <EditIcon name="editbtn" onClick={() => {updateData(report._id)}} value={report._id}/> :
+            !onClick ? <ModalMod name="editbtn" onClick={() => {updateData(report._id)}} value={report._id}/> :
              <DoneIcon onClick={() => {updateDone(report._id)}}/> 
              }</button></td>
           <td><button className="deletebtn"><DeleteForeverIcon  name="deletebtn" onClick={() => {deleteRow(report._id)}} value={report._id} /></button></td>
