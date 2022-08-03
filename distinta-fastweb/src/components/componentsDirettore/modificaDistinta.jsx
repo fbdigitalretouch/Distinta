@@ -178,6 +178,7 @@ return(
           <td onClick={promptAction} ><button  className="editbtn">{ 
             !onClick ? <ModalMod 
             name="editbtn"
+            id={report._id}
             distretto={report.distretto}
             username={report.username}
             clientName={report.clientName}
