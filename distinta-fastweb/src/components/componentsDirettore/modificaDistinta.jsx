@@ -176,9 +176,16 @@ return(
           <td onClick={promptAction} >{report.notes}</td>
           <td onClick={promptAction} >{report.clientName}</td> 
           <td onClick={promptAction} ><button  className="editbtn">{ 
-            !onClick ? <ModalMod name="editbtn" onClick={() => {updateData(report._id)}} value={report._id}/> :
-             <DoneIcon onClick={() => {updateDone(report._id)}}/> 
-             }</button></td>
+            !onClick ? <ModalMod 
+            name="editbtn"
+            distretto={report.distretto}
+            username={report.username}
+            clientName={report.clientName}
+            typeOfOperation={report.typeOfOperation}
+            notes={report.notes}
+            onClick={() => {updateData(report._id)}} value={report._id}/> :
+            <DoneIcon onClick={() => {updateDone(report._id)}}/> 
+            }</button></td>
           <td><button className="deletebtn"><DeleteForeverIcon  name="deletebtn" onClick={() => {deleteRow(report._id)}} value={report._id} /></button></td>
           </tr>
           )})}

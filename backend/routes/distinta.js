@@ -53,7 +53,7 @@ module.exports = (function () {
         const newDistretto = req.body.newDistretto;
         const newUsername = req.body.newUsername;
         const newDate = req.body.newDate;
-        const newAttivazione = req.body.newAttivazione;
+        const newTypeOfOperation = req.body.newTypeOfOperation;
         const newNote = req.body.newNote;
         const newClientName = req.body.newClientName;
 
@@ -61,7 +61,7 @@ module.exports = (function () {
                 distintaToUpdate.distretto = newDistretto;
                 distintaToUpdate.username = newUsername;
                 distintaToUpdate.date = newDate;
-                distintaToUpdate.typeOfOperation = newAttivazione;
+                distintaToUpdate.typeOfOperation = newTypeOfOperation;
                 distintaToUpdate.notes = newNote;
                 distintaToUpdate.clientName = newClientName;
 

@@ -12,13 +12,12 @@ function ModalMod(props) {
   const [utentis,setUtenti] = useState([]);
 
     const [distinta,setDistinta] = useState({
-    index:"",
-    username:"",
-    distretto:"",
-    typeOfOperation:"",
-    clientName:"",
-    notes:"",
-    date: ""
+    newUsername:"",
+    newDistretto:"",
+    newTypeOfOperation:"",
+    newClientName:"",
+    newNotes:"",
+    newDate: ""
 
   })
 
@@ -47,8 +46,6 @@ function ModalMod(props) {
          .then(response => setUtenti(response.data))
          .catch(error => {console.log('There was an error!', error)})
           },[]);
-
-  
 
 
 //////////////////////////////////////SelectHandleChange/////////////////////////////////////
@@ -88,9 +85,11 @@ function ModalMod(props) {
             <option>{props.username}</option>
             {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
          </Form.Select>
-          <Form.Control as="textarea" rows={2} name="notes" onChange={handleChange} value={distinta.notes}>
-            {props.notes}
-          </Form.Control>
+
+          <Form.Control className="mb-3" type="text" placeholder={props.typeOfOperation} name="typeOfOperation" onChange={handleChange} value={distinta.typeOfOperation} />
+          <Form.Control className="mb-3" type="text" name="clientName" onChange={handleChange} value={distinta.clientName} placeholder={props.clientName} />
+          <Form.Control className="mb-3" as="textarea" rows={2} name="notes" onChange={handleChange} value={distinta.notes} placeholder={props.notes} /> 
+
           </Form.Group>
 
         </Modal.Body>
