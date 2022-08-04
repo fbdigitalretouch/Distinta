@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios"
 
@@ -20,7 +19,6 @@ function  ModalMod(props) {
     newTypeOfOperation:"",
     newClientName:"",
     newNotes:"",
-    newDate: ""
 
   })
 
@@ -70,13 +68,23 @@ function  ModalMod(props) {
        console.log(modRep)
       
   }
-//////////////////////////////////////Select Username/////////////////////////////////////
+//////////////////////////////////////update Part/////////////////////////////////////
+
+const submitChange = async (submitId) => {
+  const id = await submitId;
+
+  axios 
+        .put(`http://localhost:3001/distinta/update/${id}`,distinta)
+        .then(response => console.log(distinta))
+        .catch(error => console.log('There was an error!', error))
+}
+//////////////////////////////////////Render/////////////////////////////////////
 
 
   return (
     <>
       
-       <EditIcon onClick={handleShow}/>
+  <EditIcon onClick={handleShow}/>
      
 
   <Modal show={show} onHide={handleClose}>
@@ -96,11 +104,11 @@ function  ModalMod(props) {
             {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
         </Form.Select>
             
-            <Form.Control className="mb-3" type="text" name="typeOfOperation" onChange={handleChange} value={distinta.typeOfOperation} placeholder={props.typeOfOperation} />
+            <Form.Control className="mb-3" type="text" name="newTypeOfOperation" onChange={handleChange} value={distinta.typeOfOperation} placeholder={props.typeOfOperation} />
 
-            <Form.Control className="mb-3" type="text" name="clientName" onChange={handleChange} value={distinta.clientName} placeholder={props.clientName}/>
+            <Form.Control className="mb-3" type="text" name="newClientName" onChange={handleChange} value={distinta.clientName} placeholder={props.clientName}/>
 
-            <Form.Control className="mb-3" as="textarea" rows={2} name="notes" onChange={handleChange} value={distinta.notes} placeholder={props.notes}/> 
+            <Form.Control className="mb-3" as="textarea" rows={2} name="newNotes" onChange={handleChange} value={distinta.notes} placeholder={props.notes}/> 
 
         </Form.Group>
 
@@ -109,7 +117,7 @@ function  ModalMod(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={() => {submitChange(props.id); handleClose()}}>
             Save Changes
           </Button>
         </Modal.Footer>

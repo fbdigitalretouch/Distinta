@@ -46,10 +46,17 @@ module.exports = (function () {
             .catch(err => res.status(400).json("Error : " + err));
     });
 
-    router.delete("/delete/:id", async (req, res) => {
+    router.delete("/delete/:id",  (req, res) => {
         const id = req.params.id;
-        await Distinta.findByIdAndDelete(id).exec()
+         Distinta.findByIdAndDelete(id, err => {
+            if(err){
+                console.log(err);
+            }else{
+                res.json("Succesfully deleted")
+            }
+        })
         console.log(`Item ${id} deleted`)
+       
 
     })
 
@@ -59,15 +66,16 @@ module.exports = (function () {
         const newUsername = req.body.newUsername;
         const newDate = req.body.newDate;
         const newTypeOfOperation = req.body.newTypeOfOperation;
-        const newNote = req.body.newNote;
+        const newNotes = req.body.newNotes;
         const newClientName = req.body.newClientName;
 
-        await Distinta.findById(id, (error,distintaToUpdate) =>{
+       await Distinta.findById(id, (error,distintaToUpdate) =>{
+                console.log("updating")
                 distintaToUpdate.distretto = newDistretto;
                 distintaToUpdate.username = newUsername;
-                distintaToUpdate.date = newDate;
+               // distintaToUpdate.date = newDate;
                 distintaToUpdate.typeOfOperation = newTypeOfOperation;
-                distintaToUpdate.notes = newNote;
+                distintaToUpdate.notes = newNotes;
                 distintaToUpdate.clientName = newClientName;
 
                 distintaToUpdate.save()

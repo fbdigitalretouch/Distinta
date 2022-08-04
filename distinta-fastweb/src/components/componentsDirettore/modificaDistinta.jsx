@@ -4,8 +4,6 @@ import React,{useState,useEffect} from "react";
 import {Container,Form,Table,Button} from "react-bootstrap"
 import Direttore from "../Direttore"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import DoneIcon from '@mui/icons-material/Done';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import ModalMod from "./modal"
 
 
@@ -13,20 +11,10 @@ function ModificaDistinta(){
 
 const [reports,setDistinta] = useState([]);
 const [distrettos,setDistretto] = useState([]);
-const [deleted,setDeleted] = useState("");
 const [choise,setChoise] = useState("");
 const [utentis,setUtenti] = useState([]);
 
 /////////////////////////////////////////////////
-
-const [updateId,setUpdateId] = useState("");
-const [updated,setUpdated] = useState({})
-const [onClick,setOnClick] = useState(false);
-const [updateDone,setUpdateDone] = useState()
-
-
-
-
 
 
 
@@ -81,42 +69,25 @@ function handleChange(e){
  }   
 //////////////////////////////////////////////////edit///////////////////////////////////////////////////////
 
-const updateData = (id) => {
-
-setUpdateId(id);
-
-setOnClick(true);
-}
-
-function promptAction(e){
-  
-    const {name,value} = e.target;
-  
-    setUpdated((prevNote) => {
-        return {
-          ...prevNote,
-          [name]: value,
-          
-        };
-        
-      })
-   
- }
 
 
 //////////////////////////////////////////////////delete///////////////////////////////////////////////////////
 
-
- const deleteRow = async (id) => {
-
-      axios
-        .delete(`http://localhost:3001/distinta/delete/${id}`)
-        .then( await
-               axios
-               .get("http://localhost:3001/distinta")
-               .then( response => setDistinta(response.data))
-               .catch(error => {console.log('There was an error!', error)}))
+    function pageUpdate(){
+     axios
+        .get("http://localhost:3001/distinta")
+        .then( response => setDistinta(response.data))
         .catch(error => {console.log('There was an error!', error)})
+    }
+
+     function deleteRow(id)  {
+
+     axios
+          .delete(`http://localhost:3001/distinta/delete/${id}`)
+          .then(response => pageUpdate())
+          .catch(error => {console.log('There was an error!', error)})
+
+
       
  }
  
@@ -168,15 +139,15 @@ return(
         
        { reports.slice(0).reverse().map((report) => {return(  
           <tr>        
-          <td key={report.id}>{reports.indexOf(report) + 1}</td>
-          <td onClick={promptAction} >{report.username}</td>
-          <td onClick={promptAction} >{report.typeOfOperation}</td>
-          <td onClick={promptAction} >{report.date}</td>
-          <td onClick={promptAction} >{report.distretto}</td>
-          <td onClick={promptAction} >{report.notes}</td>
-          <td onClick={promptAction} >{report.clientName}</td> 
-          <td onClick={promptAction} ><button  className="editbtn">{ 
-            !onClick ? <ModalMod 
+          <td key={report._id}>{reports.indexOf(report) + 1}</td>
+          <td>{report.username}</td>
+          <td>{report.typeOfOperation}</td>
+          <td>{report.date}</td>
+          <td>{report.distretto}</td>
+          <td>{report.notes}</td>
+          <td>{report.clientName}</td> 
+          <td><ModalMod 
+            key = {report._id}
             name="editbtn"
             id={report._id}
             distretto={report.distretto}
@@ -184,9 +155,7 @@ return(
             clientName={report.clientName}
             typeOfOperation={report.typeOfOperation}
             notes={report.notes}
-            onClick={() => {updateData(report._id)}} value={report._id}/> :
-            <DoneIcon onClick={() => {updateDone(report._id)}}/> 
-            }</button></td>
+            value={report._id}/></td>
           <td><button className="deletebtn"><DeleteForeverIcon  name="deletebtn" onClick={() => {deleteRow(report._id)}} value={report._id} /></button></td>
           </tr>
           )})}
