@@ -60,7 +60,9 @@ module.exports = (function () {
 
     })
 
-    router.put("/update/:id", async (req,res) => {
+    
+
+    router.patch("/update/:id", async (req,res) => {
         const id = req.params.id;
         const newDistretto = req.body.newDistretto;
         const newUsername = req.body.newUsername;
@@ -69,16 +71,24 @@ module.exports = (function () {
         const newNotes = req.body.newNotes;
         const newClientName = req.body.newClientName;
 
-       await Distinta.findById(id, (error,distintaToUpdate) =>{
-                console.log("updating")
-                distintaToUpdate.distretto = newDistretto;
-                distintaToUpdate.username = newUsername;
-               // distintaToUpdate.date = newDate;
-                distintaToUpdate.typeOfOperation = newTypeOfOperation;
-                distintaToUpdate.notes = newNotes;
-                distintaToUpdate.clientName = newClientName;
+        const object = {
+            distretto:newDistretto,
+            username:newUsername,
+            typeOfOperation:newTypeOfOperation,
+            notes:newNotes,
+            clientName:newClientName
+        }
 
-                distintaToUpdate.save()
+       await  Distinta.findByIdAndUpdate(id, object, (error,distintaToUpdate) =>{
+                if(!error){console.log("updated")}
+             //   distintaToUpdate.distretto = newDistretto;
+             //   distintaToUpdate.username = newUsername;
+             //  // distintaToUpdate.date = newDate;
+             //   distintaToUpdate.typeOfOperation = newTypeOfOperation;
+             //   distintaToUpdate.notes = newNotes;
+             //   distintaToUpdate.clientName = newClientName;
+
+              //  distintaToUpdate.save()
         })
         .catch((err) => {if(err){console.log(err)}})
 

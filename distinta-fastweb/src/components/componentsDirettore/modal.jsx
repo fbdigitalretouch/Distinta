@@ -7,10 +7,9 @@ import axios from "axios"
 
 function  ModalMod(props) {
   const [show, setShow] = useState(false);
-  const [reports,setReport] = useState([]);
   const [distrettos,setDistretto] = useState([]);
   const [utentis,setUtenti] = useState([]);
-  const [modRep,setModRep] = useState()
+
  
 
     const [distinta,setDistinta] = useState({
@@ -45,7 +44,20 @@ function  ModalMod(props) {
 
 //////////////////////////////////////SelectHandleChange/////////////////////////////////////
 
-  function handleChange(e){
+
+
+  const idSet = async (propId) => {
+     const id = await propId;
+       axios
+       .get(`http://localhost:3001/distinta/find/${id}`)
+       .then(response =>setDistinta(response.data))
+       .catch(error => {console.log('There was an error!', error)})
+
+       console.log(distinta)
+      
+  }
+
+    function handleChange(e){
     const {name,value} = e.target
   setDistinta((prevNote) => {
       return {
@@ -57,24 +69,13 @@ function  ModalMod(props) {
     })
 
   }
-
-  const idSet = async (propId) => {
-     const id = await propId;
-       axios
-       .get(`http://localhost:3001/distinta/find/${id}`)
-       .then(response =>setModRep(response.data))
-       .catch(error => {console.log('There was an error!', error)})
-
-       console.log(modRep)
-      
-  }
 //////////////////////////////////////update Part/////////////////////////////////////
 
 const submitChange = async (submitId) => {
   const id = await submitId;
 
   axios 
-        .put(`http://localhost:3001/distinta/update/${id}`,distinta)
+        .patch(`http://localhost:3001/distinta/update/${id}`,distinta)
         .then(response => console.log(distinta))
         .catch(error => console.log('There was an error!', error))
 }
@@ -104,11 +105,11 @@ const submitChange = async (submitId) => {
             {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
         </Form.Select>
             
-            <Form.Control className="mb-3" type="text" name="newTypeOfOperation" onChange={handleChange} value={distinta.typeOfOperation} placeholder={props.typeOfOperation} />
+            <Form.Control className="mb-3" type="text" name="newTypeOfOperation" onChange={handleChange}  placeholder={props.typeOfOperation} />
 
-            <Form.Control className="mb-3" type="text" name="newClientName" onChange={handleChange} value={distinta.clientName} placeholder={props.clientName}/>
+            <Form.Control className="mb-3" type="text" name="newClientName" onChange={handleChange} placeholder={props.clientName}/>
 
-            <Form.Control className="mb-3" as="textarea" rows={2} name="newNotes" onChange={handleChange} value={distinta.notes} placeholder={props.notes}/> 
+            <Form.Control className="mb-3" as="textarea" rows={2} name="newNotes" onChange={handleChange}  placeholder={props.notes}/> 
 
         </Form.Group>
 
