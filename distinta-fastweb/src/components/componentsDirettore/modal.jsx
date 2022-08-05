@@ -69,6 +69,7 @@ function  ModalMod(props) {
     })
 
   }
+
 //////////////////////////////////////update Part/////////////////////////////////////
 
 const submitChange = async (submitId) => {
@@ -76,9 +77,16 @@ const submitChange = async (submitId) => {
 
   axios 
         .patch(`http://localhost:3001/distinta/update/${id}`,distinta)
-        .then(response => console.log(distinta))
+        .then(response => {console.log(distinta);
+             axios
+                 .get("http://localhost:3001/distinta")
+                 .then(response => setDistinta(response.data))
+                 .catch(error => {console.log('There was an error!', error)})})
         .catch(error => console.log('There was an error!', error))
+
+
 }
+
 //////////////////////////////////////Render/////////////////////////////////////
 
 
