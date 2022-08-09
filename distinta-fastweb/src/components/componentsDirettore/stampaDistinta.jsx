@@ -1,7 +1,6 @@
 import '../../App.css'
 import React, { useState, useEffect } from 'react';
 import {Container,Form,Table,Button} from "react-bootstrap"
-import Modal from 'react-bootstrap/Modal';
 import Direttore from "../Direttore"
 import axios from "axios"
 
@@ -63,13 +62,13 @@ function handleChange(e){
   
  }   
 
- 
+  //////////////////////////////////////////////////rendering///////////////////////////////////////////////////////
 
     return( 
 <div>
 <Direttore />
     <Container fluid className="tableDistinta">
-        <h1> Modifica Distinta</h1>
+        <h1> Stampa Distinta</h1>
 
     <Form onSubmit={submitChoise}>
         <Form.Group className="mb-3" name="choise" value={choise}>
@@ -89,6 +88,40 @@ function handleChange(e){
           </Button>
         </Form.Group>
     </Form>
+    </Container>
+
+    <Container fluid className="tableDistinta">
+    <Table bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Attività</th>
+          <th>Data</th>
+          <th>Distretto</th>
+          <th>Note</th>
+          <th>Cliente</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        
+       { reports.slice(0).reverse().map((report) => {return(  
+          <tr>        
+          <td key={report._id}>{reports.indexOf(report) + 1}</td>
+          <td>{report.username}</td>
+          <td>{report.typeOfOperation}</td>
+          <td>{report.date}</td>
+          <td>{report.distretto}</td>
+          <td>{report.notes}</td>
+          <td>{report.clientName}</td>
+          </tr>
+          )})}
+        
+      </tbody>
+    </Table>
+
+
     </Container>
             
 </div>
