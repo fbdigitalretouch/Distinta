@@ -5,6 +5,7 @@ import {Container,Form,Table,Button} from "react-bootstrap"
 import Direttore from "../Direttore"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ModalMod from "./modal"
+import ReplayIcon from '@mui/icons-material/Replay';
 
 
 function ModificaDistinta(){
@@ -117,6 +118,7 @@ return(
                   <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" type="submit" >
               Invia
               </Button>
+              <Button className="btn-lg modifyBtn ml-2" variant="warning" onClick={() => window.location.reload(false)}>  <ReplayIcon/> </Button>
               </Form.Group>
          </Form>
 
