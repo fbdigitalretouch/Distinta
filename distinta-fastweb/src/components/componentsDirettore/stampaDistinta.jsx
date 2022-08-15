@@ -2,6 +2,7 @@ import '../../App.css'
 import React, { useState, useEffect } from 'react';
 import {Container,Form,Table,Button} from "react-bootstrap"
 import ModalStampa from "./modalStampa";
+import PrintIcon from '@mui/icons-material/Print';
 import Direttore from "../Direttore"
 import axios from "axios"
 
@@ -53,20 +54,30 @@ function handleChange(e){
 } 
 
 
- function submitChoise(event){
+const submitChoise = async (event) => {
     event.preventDefault()
 
-      axios
+      await axios
         .get("http://localhost:3001/distinta/")
         .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username))})
         .catch(error => {console.log('There was an error!', error)})
+
+
   
  }   
+
+ function printMe(){
+  setTimeout(()=>{
+    window.print()
+  },1000)
+ }
 
  
 
     return( 
+  
 <div>
+<div  className="noPrint">
 <Direttore />
     <Container fluid className="tableDistinta">
         <h1> Modifica Distinta</h1>
@@ -84,15 +95,51 @@ function handleChange(e){
         </Form.Select>
           </Form.Group>
         <Form.Group > 
-          <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" type="submit" >
-              <ModalStampa/>
+              <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" type="submit" >
+              Invia
+              </Button>
+          <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" onClick={printMe}>
+              <PrintIcon/>
           </Button>
         </Form.Group>
     </Form>
     </Container>
+  </div>
+  <div>  
 
 
-            
+<Table bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Attività</th>
+          <th>Data</th>
+          <th>Distretto</th>
+          <th>Note</th>
+          <th>Cliente</th>
+        </tr>
+      </thead>
+      <tbody>
+
+
+        
+       { reports.slice(0).reverse().map((report) => {return(  
+          <tr>        
+          <td key={report._id}>{reports.indexOf(report) + 1}</td>
+          <td>{report.username}</td>
+          <td>{report.typeOfOperation}</td>
+          <td>{report.date}</td>
+          <td>{report.distretto}</td>
+          <td>{report.notes}</td>
+          <td>{report.clientName}</td> 
+          </tr>
+          )})}
+        
+      </tbody>
+    </Table>
+
+ </div>           
 </div>
     )
 }

@@ -7,7 +7,8 @@ import { Link } from "react-router-dom"
 function Direttore(){
     return(
         
-        <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark" >
+        
+        <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark"  >
                <Container> 
                    <Navbar.Brand href="#home">Menù Direttore</Navbar.Brand>
                    <Navbar.Toggle aria-controls="navbarScroll" data-bs-toggle="collapse" data-bs-target="#navbarScroll" /> 

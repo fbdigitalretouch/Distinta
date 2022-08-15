@@ -8,7 +8,8 @@ const Navigationbar = () => {
     const { logout } = useAuth0();
     
     return (
-        <Navbar collapseOnSelect expand="sm" bg="warning" variant="light" >
+        <div className="noPrint">
+        <Navbar collapseOnSelect expand="sm" bg="warning" variant="light"  >
                <Container> 
                    <Navbar.Brand href="/home">Distinta Fastweb</Navbar.Brand>
                    <Navbar.Toggle aria-controls="navbarScroll" data-bs-toggle="collapse" data-bs-target="#navbarScroll" /> 
@@ -25,6 +26,7 @@ const Navigationbar = () => {
                </Container>   
                </Navbar.Collapse>
         </Navbar>
+        </div>
     );
 }
  
