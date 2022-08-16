@@ -1,7 +1,6 @@
 import '../../App.css'
 import React, { useState, useEffect } from 'react';
 import {Container,Form,Table,Button} from "react-bootstrap"
-import ModalStampa from "./modalStampa";
 import PrintIcon from '@mui/icons-material/Print';
 import Direttore from "../Direttore"
 import axios from "axios"
