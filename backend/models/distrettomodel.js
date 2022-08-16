@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const distrettoSchema = new Schema({
 
     distretto: {
         type:String,
@@ -12,8 +12,8 @@ const userSchema = new Schema({
 });
 
 
-const User = mongoose.model("User", userSchema);
+const Distretto = mongoose.model("Distretto", distrettoSchema);
 
 
-module.exports = User
+module.exports = Distretto
 

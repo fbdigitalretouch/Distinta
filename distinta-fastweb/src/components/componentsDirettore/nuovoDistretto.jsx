@@ -26,7 +26,7 @@ function NuovoDistretto(){
     e.stopPropagation()
 
     axios
-        .post("http://localhost:3001/user/add",distretto)
+        .post("http://localhost:3001/distretto/add",distretto)
         .then(alert(distretto.distretto))
     }
 

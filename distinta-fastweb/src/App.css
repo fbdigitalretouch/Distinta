@@ -6,7 +6,7 @@
   margin-top: 3%;
 }
 
-.loginButton{
+.loginButton, .btnDirettore{
   color: #523100;
   background-color: #ffbb00;
   border-radius: 50px;

@@ -11,7 +11,7 @@ function Inserisci(){
 
 
 useEffect(() => {
-  axios.get("http://localhost:3001/user")
+  axios.get("http://localhost:3001/distretto")
       .then(response => {setDistretto(response.data)})
       .catch(error => {console.log('There was an error!', error);},)},[])
 
