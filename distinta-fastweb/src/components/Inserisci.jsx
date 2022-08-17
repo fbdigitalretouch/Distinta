@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 function Inserisci(){
 
   const { user } = useAuth0();
+  const userLogged = user.name;
   const [distretto,setDistretto] = useState([])
   const [usersList,setUserList] = useState([])
 
@@ -22,6 +23,8 @@ useEffect(() => {
       .catch(error => {console.log('There was an error!', error);},)},[])
 
 
+  //////////// modello per registrare i dati immessi //////////////
+
   const [distinta,setDistinta] = useState({
     index:"",
     username:user.name,
@@ -34,9 +37,7 @@ useEffect(() => {
   })
   
  
-  const [userLogged,setUserLogged] = useState({
-    username:user.name
-  })
+ 
 
   function handleChange(event) {
     event.preventDefault()
@@ -52,6 +53,8 @@ useEffect(() => {
     });
   }
 
+
+////////// creazione distinta con condizionale se l'utente è la prima volta che si registra o meno ////////////
   function createAttivazione(event){
     event.preventDefault()
     event.stopPropagation()
@@ -64,7 +67,7 @@ useEffect(() => {
 
 const mappedUsers = usersList.map(e => {return(e.username)})
 
-if(mappedUsers.includes(user.name) === false){     
+if(mappedUsers.includes(userLogged) === false){     
 
 
 
@@ -79,6 +82,8 @@ if(mappedUsers.includes(user.name) === false){
         }
 
   }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
 
     return(
         <Container className="inputBox"> 
@@ -120,9 +125,3 @@ if(mappedUsers.includes(user.name) === false){
 
 export default Inserisci;
 
-    //         <Form.Group className="mb-3">
-    //            <Form.Select aria-label="Default select example">
-    //            <option>Seleziona il tuo Nome</option>
-    //               {users.map(user => {return(<option>{user.username}</option>)})}
-    //            </Form.Select>
-    //         </Form.Group>\*

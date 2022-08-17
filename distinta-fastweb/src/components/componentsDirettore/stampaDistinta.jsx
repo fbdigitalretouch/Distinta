@@ -65,6 +65,8 @@ const submitChoise = async (event) => {
   
  }   
 
+ ///////////////////////////////////////////////////funzione di stampa///////////////////////////////////////////////////////////////////
+
  function printMe(){
   setTimeout(()=>{
     window.print()
@@ -73,7 +75,7 @@ const submitChoise = async (event) => {
 
  
 
-    return( 
+return( 
   
 <div>
 <div  className="noPrint">

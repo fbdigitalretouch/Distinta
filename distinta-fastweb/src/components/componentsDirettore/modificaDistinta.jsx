@@ -2,6 +2,11 @@ import '../../App.css'
 import axios from "axios"
 import React,{useState,useEffect} from "react";
 import {Container,Form,Table,Button} from "react-bootstrap"
+
+import DatePicker, { registerLocale } from "react-datepicker";
+import it from "date-fns/locale/it";
+
+
 import Direttore from "../Direttore"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ModalMod from "./modal"
@@ -10,12 +15,15 @@ import ReplayIcon from '@mui/icons-material/Replay';
 
 function ModificaDistinta(){
 
+registerLocale("it",it);
+
 const [reports,setDistinta] = useState([]);
 const [distrettos,setDistretto] = useState([]);
 const [choise,setChoise] = useState("");
 const [utentis,setUtenti] = useState([]);
 
-/////////////////////////////////////////////////
+  const [startDate, setStartDate] = useState(new Date());
+/////////////////////////////////////////////////recupero dei dati dal database/////////////////////////////////////////
 
 
 
@@ -42,7 +50,7 @@ const [utentis,setUtenti] = useState([]);
 
 
 
- //////////////////////////////////////////////////selecting///////////////////////////////////////////////////////
+ //////////////////////////////////////////////////handlechange della selezione///////////////////////////////////////////////////////
         
 function handleChange(e){
 
@@ -58,17 +66,22 @@ function handleChange(e){
     })
 } 
 
+/////////// creare una funzione per aggiungere la data a setchoise poi con il submit filtrare anche il mese.
+
 
  function submitChoise(event){
     event.preventDefault()
 
       axios
         .get("http://localhost:3001/distinta/")
-        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username))})
+        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username));console.log(startDate.getMonth() + 1);})
         .catch(error => {console.log('There was an error!', error)})
+
   
  }   
-//////////////////////////////////////////////////edit///////////////////////////////////////////////////////
+
+ ///////////////////////////////////////////////////date selection ////////////////////////////////////////////
+
 
 
 
@@ -93,7 +106,6 @@ function handleChange(e){
  }
  
 
-//////////////////////////////////////////////////renderpage///////////////////////////////////////////////////////
 
 return(
 
@@ -113,6 +125,19 @@ return(
             <option>Tutti</option>
             {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
          </Form.Select>
+
+               <DatePicker
+
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        selectsStart
+        locale="it"
+        startDate={startDate}
+        dateFormat="MM/yyyy"
+        showMonthYearPicker
+      />
+
+
          </Form.Group>
           <Form.Group > 
                   <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" type="submit" >

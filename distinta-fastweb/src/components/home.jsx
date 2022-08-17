@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
+////////////// utilizzo di AUTH0 come metodo di autenticazione //////////////////////////////////////////////
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
 

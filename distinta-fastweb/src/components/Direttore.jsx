@@ -10,7 +10,8 @@ const {user} = useAuth0()
 
 const [direttore,setDirettore] = useState()
 
-      
+//////////////////////////////////////Funzione per consentire solo al Direttore di accedere////////////////////////////////
+
 useEffect(() => {
     if(user.name === "Federico Bottos" || direttore === true){
         console.log("true");

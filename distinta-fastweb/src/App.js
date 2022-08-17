@@ -1,7 +1,7 @@
 import './App.css';
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "react-datepicker/dist/react-datepicker.css";
+import React from "react";
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 
 import Navigationbar from './components/navbar';
@@ -11,24 +11,15 @@ import NuovoDistretto from "./components/componentsDirettore/nuovoDistretto"
 import ModificaDistinta from "./components/componentsDirettore/modificaDistinta"
 import Direttore from "./components/Direttore"
 import StampaDistinta from "./components/componentsDirettore/stampaDistinta"
-import Login from "./components/login-module"
 import Home from "./components/home"
+
+
 import { useAuth0 } from "@auth0/auth0-react";
 
 
-
-
-// Devo sistemare il login in modo da poter renderizzare condizionalmente i reindirizzamenti solo nel caso in cui 
-// l'utente sia loggato.
-
 function App() {
 
-
-
-  const { loginWithRedirect,isAuthenticated,user } = useAuth0();
-
-  
-
+  const { loginWithRedirect,isAuthenticated } = useAuth0();
 
   return (
 
@@ -49,7 +40,6 @@ function App() {
             <Route path="/direttore/nuovoDistretto" element={<NuovoDistretto/>} />
             <Route path="/direttore/modifica" element={<ModificaDistinta/>} />
             <Route path="/direttore/stampaDistinta" element={<StampaDistinta/>} />
-            <Route path="/login" element={<Login/>} />
             </Routes> : <button className='loginButton' onClick={() => loginWithRedirect()}>Log In</button>}
         </Router>
 

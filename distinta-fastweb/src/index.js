@@ -9,8 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
   <Auth0Provider
-    domain="fb-digitalretouch.eu.auth0.com"
-    clientId="k7hN51f6iKILJleL6iAglYcsk67BZJnr"
+    domain={process.env.REACT_APP_DOMAIN}
+    clientId={process.env.REACT_APP_CLIENT_ID}
     redirectUri={window.location.origin
     }
     useRefreshTokens

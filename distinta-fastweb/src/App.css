@@ -81,6 +81,8 @@
   
 }
 
+/* classe per eliminare le parti che non si vogliono stampare da stampaDistinta.jsx*/
+
 @media print {
 .noPrint{
   display:none;
