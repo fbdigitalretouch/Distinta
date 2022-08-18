@@ -37,7 +37,7 @@ module.exports = (function () {
             typeOfOperation,
             clientName,
             notes,
-            date,
+            //date,
 
         });
 

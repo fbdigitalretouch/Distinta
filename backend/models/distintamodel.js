@@ -13,8 +13,8 @@ const distintaSchema = new Schema({
     typeOfOperation: String,
     clientName: String,
     notes:String,
-    date:String
-});
+   
+},{timestamps:true});
 
 
 const Distinta = mongoose.model("Distinta", distintaSchema);

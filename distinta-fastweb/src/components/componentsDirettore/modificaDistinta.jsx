@@ -23,6 +23,10 @@ const [choise,setChoise] = useState("");
 const [utentis,setUtenti] = useState([]);
 
   const [startDate, setStartDate] = useState(new Date());
+
+const [months,setMonths] = useState([]);
+const [years,setYears] = useState([]); 
+
 /////////////////////////////////////////////////recupero dei dati dal database/////////////////////////////////////////
 
 
@@ -50,6 +54,7 @@ const [utentis,setUtenti] = useState([]);
 
 
 
+
  //////////////////////////////////////////////////handlechange della selezione///////////////////////////////////////////////////////
         
 function handleChange(e){
@@ -74,7 +79,7 @@ function handleChange(e){
 
       axios
         .get("http://localhost:3001/distinta/")
-        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username));console.log(startDate.getMonth() + 1);})
+        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username));console.log(months)})
         .catch(error => {console.log('There was an error!', error)})
 
   
