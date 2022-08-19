@@ -3,6 +3,7 @@ let Distinta = require("../models/distintamodel");
 
 var router = express.Router();
 
+
 module.exports = (function () {
     'use strict';
 
@@ -21,6 +22,7 @@ module.exports = (function () {
     })
 
     router.post("/add", (req, res) => {
+        const todayDate = new Date();
         
         const index = req.body.index;
         const username = req.body.username;
@@ -29,6 +31,8 @@ module.exports = (function () {
         const clientName = req.body.clientName;
         const notes = req.body.notes;
         const date = new Date().toLocaleDateString("it-IT")
+        const month = todayDate.toLocaleString('it-IT', { month: 'long' })
+        const year = new Date().getFullYear()
 
         const newDistinta = new Distinta({
             index,
@@ -37,7 +41,9 @@ module.exports = (function () {
             typeOfOperation,
             clientName,
             notes,
-            //date,
+            date,
+            month,
+            year,
 
         });
 

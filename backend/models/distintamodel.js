@@ -13,7 +13,9 @@ const distintaSchema = new Schema({
     typeOfOperation: String,
     clientName: String,
     notes:String,
-   
+    date:String,
+    month:String,
+    year:String
 },{timestamps:true});
 
 

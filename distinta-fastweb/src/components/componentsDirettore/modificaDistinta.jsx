@@ -3,9 +3,6 @@ import axios from "axios"
 import React,{useState,useEffect} from "react";
 import {Container,Form,Table,Button} from "react-bootstrap"
 
-import DatePicker, { registerLocale } from "react-datepicker";
-import it from "date-fns/locale/it";
-
 
 import Direttore from "../Direttore"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -15,16 +12,10 @@ import ReplayIcon from '@mui/icons-material/Replay';
 
 function ModificaDistinta(){
 
-registerLocale("it",it);
-
 const [reports,setDistinta] = useState([]);
 const [distrettos,setDistretto] = useState([]);
 const [choise,setChoise] = useState("");
 const [utentis,setUtenti] = useState([]);
-
-  const [startDate, setStartDate] = useState(new Date());
-
-const [months,setMonths] = useState([]);
 const [years,setYears] = useState([]); 
 
 /////////////////////////////////////////////////recupero dei dati dal database/////////////////////////////////////////
@@ -34,10 +25,23 @@ const [years,setYears] = useState([]);
   useEffect(() => {
    axios
        .get("http://localhost:3001/distinta")
-       .then(response => setDistinta(response.data))
+       .then(response => {setDistinta(response.data);setYears(response.data.map(e =>{return(e.year)}))})
        .catch(error => {console.log('There was an error!', error)})
-  },[]);
-         
+ 
+      },[]);
+
+
+//  useEffect(() => {
+//  axios
+//      .get("http://localhost:3001/distinta")
+//      .then(response =>{ console.log(years);setYears(years.filter(function(item, pos, self) {
+//           return self.indexOf(item) == pos;}))
+//         })
+//      .catch(error => {console.log('There was an error!', error)})
+// 
+//     },[]);
+//
+
   useEffect(() => {
      axios
          .get("http://localhost:3001/distretto")
@@ -58,7 +62,7 @@ const [years,setYears] = useState([]);
  //////////////////////////////////////////////////handlechange della selezione///////////////////////////////////////////////////////
         
 function handleChange(e){
-
+  console.log(years)
   const {name,value} = e.target;
 
   setChoise((prevNote) => {
@@ -79,14 +83,13 @@ function handleChange(e){
 
       axios
         .get("http://localhost:3001/distinta/")
-        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username));console.log(months)})
+        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username))})
         .catch(error => {console.log('There was an error!', error)})
 
   
  }   
 
  ///////////////////////////////////////////////////date selection ////////////////////////////////////////////
-
 
 
 
@@ -105,9 +108,7 @@ function handleChange(e){
           .delete(`http://localhost:3001/distinta/delete/${id}`)
           .then(response => pageUpdate())
           .catch(error => {console.log('There was an error!', error)})
-
-
-      
+    
  }
  
 
@@ -130,18 +131,16 @@ return(
             <option>Tutti</option>
             {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
          </Form.Select>
-
-               <DatePicker
-
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        selectsStart
-        locale="it"
-        startDate={startDate}
-        dateFormat="MM/yyyy"
-        showMonthYearPicker
-      />
-
+         <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="month"> 
+            <option>Seleziona Mese</option>
+            <option>Tutti</option>
+            {reports.map(dates => {return(<option value={dates.month}>{dates.month}</option>)})}
+         </Form.Select>
+         <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="year"> 
+            <option>Seleziona Anno</option>
+            <option>Tutti</option>
+            {years.filter(function(item, pos, self) {return self.indexOf(item) == pos;})}
+         </Form.Select>
 
          </Form.Group>
           <Form.Group > 

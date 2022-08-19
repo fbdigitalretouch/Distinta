@@ -14,10 +14,10 @@ const [direttore,setDirettore] = useState()
 
 useEffect(() => {
     if(user.name === "Federico Bottos" || direttore === true){
-        console.log("true");
+        
         setDirettore(true)
     }else{
-        console.log("False")
+        console.log("Nome non registrato nel DB dei direttori")
         setDirettore(false)
     }
 },[])
