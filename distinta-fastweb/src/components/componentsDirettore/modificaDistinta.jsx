@@ -25,22 +25,16 @@ const [years,setYears] = useState([]);
   useEffect(() => {
    axios
        .get("http://localhost:3001/distinta")
-       .then(response => {setDistinta(response.data);setYears(response.data.map(e =>{return(e.year)}))})
+       .then(response => {setDistinta(response.data);
+                          const yearz = response.data.map(e =>{return(e.year)})
+                          const filteredY = yearz.filter((value,index) => {return yearz.indexOf(value) === index});
+                          setYears(filteredY);
+      })
        .catch(error => {console.log('There was an error!', error)})
  
       },[]);
 
 
-//  useEffect(() => {
-//  axios
-//      .get("http://localhost:3001/distinta")
-//      .then(response =>{ console.log(years);setYears(years.filter(function(item, pos, self) {
-//           return self.indexOf(item) == pos;}))
-//         })
-//      .catch(error => {console.log('There was an error!', error)})
-// 
-//     },[]);
-//
 
   useEffect(() => {
      axios
@@ -83,15 +77,18 @@ function handleChange(e){
 
       axios
         .get("http://localhost:3001/distinta/")
-        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username))})
+        .then(response => {console.log(choise);
+          setDistinta(response.data.filter((choosen) => 
+              choosen.distretto === choise.distretto && 
+              choosen.username === choise.username && 
+              choosen.month === choise.month && 
+              choosen.year === choise.year
+           
+            ))
+          })
         .catch(error => {console.log('There was an error!', error)})
 
-  
  }   
-
- ///////////////////////////////////////////////////date selection ////////////////////////////////////////////
-
-
 
 //////////////////////////////////////////////////delete///////////////////////////////////////////////////////
 
@@ -131,15 +128,15 @@ return(
             <option>Tutti</option>
             {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
          </Form.Select>
-         <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="month"> 
-            <option>Seleziona Mese</option>
+         <Form.Select onLoad={handleChange} onChange={handleChange} className="mb-3" aria-label="Default select example" name="month"> 
+            <option selected="selected" value={new Date().toLocaleString('it-IT', { month: 'long' })}>{new Date().toLocaleString('it-IT', { month: 'long' })}</option>
             <option>Tutti</option>
             {reports.map(dates => {return(<option value={dates.month}>{dates.month}</option>)})}
          </Form.Select>
-         <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="year"> 
-            <option>Seleziona Anno</option>
+         <Form.Select onLoad={handleChange} onChange={handleChange} className="mb-3" aria-label="Default select example" name="year"> 
+            <option selected="selected" value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
             <option>Tutti</option>
-            {years.filter(function(item, pos, self) {return self.indexOf(item) == pos;})}
+            {years.map(years => {return(<option value={years}>{years}</option>)})}
          </Form.Select>
 
          </Form.Group>
