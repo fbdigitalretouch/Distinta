@@ -84,6 +84,7 @@
 /* classe per eliminare le parti che non si vogliono stampare da stampaDistinta.jsx*/
 
 @media print {
+@page { size: landscape; }
 .noPrint{
   display:none;
 }}

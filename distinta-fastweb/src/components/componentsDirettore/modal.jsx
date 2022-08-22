@@ -112,13 +112,9 @@ const submitChange = async (submitId) => {
             <option>{props.username}</option>
             {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
         </Form.Select>
-            
             <Form.Control className="mb-3" type="text" name="newTypeOfOperation" onChange={handleChange}  placeholder={props.typeOfOperation} />
-
             <Form.Control className="mb-3" type="text" name="newClientName" onChange={handleChange} placeholder={props.clientName}/>
-
             <Form.Control className="mb-3" as="textarea" rows={2} name="newNotes" onChange={handleChange}  placeholder={props.notes}/> 
-
         </Form.Group>
 
         </Modal.Body>
@@ -126,7 +122,7 @@ const submitChange = async (submitId) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => {submitChange(props.id); handleClose()}}>
+          <Button variant="primary" onClick={() => {submitChange(props.id);handleClose(); setTimeout(()=>{window.location.reload(false)},1000)}}>
             Save Changes
           </Button>
         </Modal.Footer>

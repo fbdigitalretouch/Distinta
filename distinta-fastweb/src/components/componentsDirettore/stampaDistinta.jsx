@@ -11,18 +11,28 @@ const [reports,setDistinta] = useState([]);
 const [distrettos,setDistretto] = useState([]);
 const [choise,setChoise] = useState("");
 const [utentis,setUtenti] = useState([]);
+const [years,setYears] = useState([]); 
+const [months,setMonths] = useState([]); 
 
 
   useEffect(() => {
    axios
        .get("http://localhost:3001/distinta")
-       .then(response => setDistinta(response.data))
+       .then(response => {setDistinta(response.data);
+                          const yearz = response.data.map(e =>{return(e.year)})
+                          const filteredY = yearz.filter((value,index) => {return yearz.indexOf(value) === index});
+                          setYears(filteredY);
+                          const monthz = response.data.map(e => {return (e.month)})
+                          const filteredM = monthz.filter((value,index) => {return monthz.indexOf(value) === index})
+                          setMonths(filteredM);
+      })
        .catch(error => {console.log('There was an error!', error)})
-  },[]);
+ 
+      },[]);
          
   useEffect(() => {
      axios
-         .get("http://localhost:3001/user")
+         .get("http://localhost:3001/distretto")
          .then(response => setDistretto(response.data))
          .catch(error => {console.log('There was an error!', error)})
           },[]);
@@ -59,10 +69,7 @@ const submitChoise = async (event) => {
       await axios
         .get("http://localhost:3001/distinta/")
         .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username))})
-        .catch(error => {console.log('There was an error!', error)})
-
-
-  
+        .catch(error => {console.log('There was an error!', error)})  
  }   
 
  ///////////////////////////////////////////////////funzione di stampa///////////////////////////////////////////////////////////////////
@@ -81,20 +88,24 @@ return(
 <div  className="noPrint">
 <Direttore />
     <Container fluid className="tableDistinta">
-        <h1> Modifica Distinta</h1>
+        <h1> Stampa Distinta</h1>
 
     <Form onSubmit={submitChoise}>
-        <Form.Group className="mb-3" name="choise" value={choise}>
+         <Form.Group className="mb-3" name="choise" value={choise}>
             <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="distretto"> 
             <option>Seleziona Distretto</option>
             {distrettos.map(distretto => {return(<option value={distretto.distretto}>{distretto.distretto}</option>)})}
-            </Form.Select>
-        <Form.Select onChange={handleChange} className="mb-3" aria-label="Default select example" name="username"> 
-            <option>Seleziona User</option>
-            <option>Tutti</option>
-            {utentis.map(utenti => {return(<option value={utenti.username}>{utenti.username}</option>)})}
-        </Form.Select>
-          </Form.Group>
+         </Form.Select>
+         <Form.Select onLoad={handleChange} onChange={handleChange} className="mb-3" aria-label="Default select example" name="month"> 
+            <option >Mese</option>
+            {months.map(months => {return(<option value={months}>{months}</option>)})}
+         </Form.Select>
+         <Form.Select onLoad={handleChange} onChange={handleChange} className="mb-3" aria-label="Default select example" name="year"> 
+            <option> Anno</option>
+            {years.map(years => {return(<option value={years}>{years}</option>)})}
+         </Form.Select>
+
+         </Form.Group>
         <Form.Group > 
               <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" type="submit" >
               Invia
@@ -125,7 +136,7 @@ return(
 
 
         
-       { reports.slice(0).reverse().map((report) => {return(  
+       { reports.map((report) => {return(  
           <tr>        
           <td key={report._id}>{reports.indexOf(report) + 1}</td>
           <td>{report.username}</td>
