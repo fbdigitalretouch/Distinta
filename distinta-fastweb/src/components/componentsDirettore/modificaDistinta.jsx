@@ -118,7 +118,7 @@ return(
     <div>
     <Direttore/>
     <Container fluid className="tableDistinta">
-        <h1> Modifica Distinta</h1>
+        <h1 className="mt-4"> Modifica Distinta</h1>
 
     <Form onSubmit={submitChoise}>
          <Form.Group className="mb-3" name="choise" value={choise}>

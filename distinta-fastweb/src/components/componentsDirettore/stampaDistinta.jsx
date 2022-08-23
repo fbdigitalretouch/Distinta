@@ -65,13 +65,19 @@ function handleChange(e){
 
 const submitChoise = async (event) => {
     event.preventDefault()
-
-      await axios
+ await  axios
         .get("http://localhost:3001/distinta/")
-        .then(response => {setDistinta(response.data.filter(choosen => choosen.distretto === choise.distretto || choosen.username === choise.username))})
-        .catch(error => {console.log('There was an error!', error)})  
- }   
+        .then(response => {console.log(choise);
+          setDistinta(response.data.filter((choosen) => 
+              choosen.distretto === choise.distretto && 
+              // choosen.username === choise.username && 
+              choosen.month === choise.month && 
+              choosen.year === choise.year
+            ))
+          })
+        .catch(error => {console.log('There was an error!', error)})
 
+ }   
  ///////////////////////////////////////////////////funzione di stampa///////////////////////////////////////////////////////////////////
 
  function printMe(){
@@ -88,7 +94,7 @@ return(
 <div  className="noPrint">
 <Direttore />
     <Container fluid className="tableDistinta">
-        <h1> Stampa Distinta</h1>
+        <h1 className="mt-4"> Stampa Distinta</h1>
 
     <Form onSubmit={submitChoise}>
          <Form.Group className="mb-3" name="choise" value={choise}>
@@ -119,7 +125,7 @@ return(
   </div>
   <div>  
 
-
+<Container fluid className="stampaTableDistinta">
 <Table bordered hover>
       <thead>
         <tr>
@@ -150,7 +156,7 @@ return(
         
       </tbody>
     </Table>
-
+</Container>
  </div>           
 </div>
     )

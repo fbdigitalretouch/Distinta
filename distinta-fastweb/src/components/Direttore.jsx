@@ -2,25 +2,41 @@ import React, {useState,useEffect} from "react";
 import { Nav, Navbar, NavLink,Container,Button } from "react-bootstrap";
 import { Link } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
 
 function Direttore(){
 
-const {user} = useAuth0()
+const {user} = useAuth0();
+const dirName = user.name;
+const [direttore,setDirettore] = useState();
+const [direttori,setDirettori] = useState([]);
 
-const [direttore,setDirettore] = useState()
+useEffect(() => {
+    axios   
+        .get("http://localhost:3001/direttore")
+        .then(response => {setDirettori(async() => {const map = await response.data; return(map.map(e => {return (e.direttore)}))})
+    })
+        .catch(error => {console.log('There was an error!', error)})
+
+         
+},[])
+
+
 
 //////////////////////////////////////Funzione per consentire solo al Direttore di accedere////////////////////////////////
 
 useEffect(() => {
-    if(user.name === "Federico Bottos" || direttore === true){
-        
-        setDirettore(true)
-    }else{
-        console.log("Nome non registrato nel DB dei direttori")
-        setDirettore(false)
-    }
-},[])
+console.log(direttori)
+//direttore   if(direttori.direttore === dirName){
+//direttore       
+//direttore       setDirettore(true)
+//direttore   }else{
+//direttore       console.log("Nome non registrato nel DB dei direttori")
+//direttore       setDirettore(false)
+//   }
+
+},[]);
 
     return(
         <div>
