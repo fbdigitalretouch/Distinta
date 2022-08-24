@@ -8,8 +8,8 @@ const Home = () => {
     return(
     isAuthenticated && (
       <div className="homeDiv">
-        <h2  name="username" value={user.name}>Benvenuto {user.name}</h2>
-        <p>L'indirizzo email con cui hai fatto il login è {user.email}</p>
+        <h2  name="username" value={user.name}>Benvenuto {user.name}.</h2>
+        <p>L'indirizzo email con cui hai fatto il login è {user.email}.</p>
       </div>
     )
   )

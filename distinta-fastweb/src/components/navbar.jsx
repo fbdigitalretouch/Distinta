@@ -11,7 +11,7 @@ const Navigationbar = () => {
         <div className="noPrint">
         <Navbar collapseOnSelect expand="sm" bg="warning" variant="light"  >
                <Container> 
-                   <Navbar.Brand href="/home">Distinta Fastweb</Navbar.Brand>
+                   <Navbar.Brand href="/home">Distinta ArcoGroup - Fastweb</Navbar.Brand>
                    <Navbar.Toggle aria-controls="navbarScroll" data-bs-toggle="collapse" data-bs-target="#navbarScroll" /> 
                </Container>
                    <Navbar.Collapse id="navbarScroll">
