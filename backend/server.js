@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors")
 const mongoose = require("mongoose");
+const path = require("path");
 
 
 
@@ -26,6 +27,24 @@ app.use("/distretto",distrettoRouting);
 app.use("/utenti",utentiRouting);
 app.use("/direttore",direttoreRouting);
 
-app.listen(port,()=>{console.log("Server is running on port " + port);
-})
+ __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../distinta-fastweb/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "../distinta-fastweb", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+const PORT = process.env.PORT || 3001;
+
+app.listen(
+  PORT,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}..`  )
+);
 
