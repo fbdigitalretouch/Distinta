@@ -10,33 +10,24 @@ function Direttore(){
 const {user} = useAuth0();
 const dirName = user.name;
 const [direttore,setDirettore] = useState();
-const [direttori,setDirettori] = useState([]);
+
+//////////////////////////////////////Funzione per consentire solo al Dir di accedere al menù Direttore////////////////////////////////
 
 useEffect(() => {
     axios   
         .get("http://localhost:3001/direttore")
-        .then(response => {setDirettori(async() => {const map = await response.data; return(map.map(e => {return (e.direttore)}))})
-    })
+        .then(response => {setDirettore(() => {
+            const dirRisp = response.data;
+            if(dirRisp.map(e => {return(e.direttore)}).includes(dirName)){
+                return true
+            }else{alert("Non sei il direttore")
+                return false}
+        })})
+    
         .catch(error => {console.log('There was an error!', error)})
-
-         
+      
 },[])
 
-
-
-//////////////////////////////////////Funzione per consentire solo al Direttore di accedere////////////////////////////////
-
-useEffect(() => {
-console.log(direttori)
-//direttore   if(direttori.direttore === dirName){
-//direttore       
-//direttore       setDirettore(true)
-//direttore   }else{
-//direttore       console.log("Nome non registrato nel DB dei direttori")
-//direttore       setDirettore(false)
-//   }
-
-},[]);
 
     return(
         <div>

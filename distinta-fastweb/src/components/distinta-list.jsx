@@ -12,7 +12,7 @@ function Distinta(){
     axios
     .get("http://localhost:3001/distinta/")
     .then((response) => {
-      setReports(response.data); console.log(response.data)
+      setReports(response.data)
     });
   },[]);
  
