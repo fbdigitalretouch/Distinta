@@ -33,8 +33,8 @@ function App() {
             {isAuthenticated ? 
             <Routes>
 
-            <Route exact path="/" element={<Home />}/>
-            <Route exact path="/report" element={<DistintaList/>} />
+            <Route path="/" element={<Home />}/>
+            <Route path="/report" element={<DistintaList/>} />
             <Route path="/inserisci" element={<Inserisci/>} />
             <Route path="/direttore" element={<Direttore/>} />
             <Route path="/direttore/nuovoDistretto" element={<NuovoDistretto/>} />
