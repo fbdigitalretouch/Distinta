@@ -30,10 +30,10 @@ app.use("/direttore",direttoreRouting);
  __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../distinta-fastweb/build")));
+  app.use(express.static(path.join(__dirname, "./distinta-fastweb/build")));
 
   app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "../distinta-fastweb", "build", "index.html"))
+    res.sendFile(path.resolve(__dirname, "./distinta-fastweb", "build", "index.html"))
   );
 } else {
   app.get("/", (req, res) => {
