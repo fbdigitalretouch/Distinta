@@ -41,7 +41,7 @@ function NuovoDistretto(){
     e.stopPropagation()
 
     axios
-        .post("http://localhost:3001/distretto/add",distretto)
+        .post("https://distinta-fastweb.herokuapp.com/distretto/add",distretto)
         .then(alert(distretto.distretto))
     }
 
@@ -50,7 +50,7 @@ function NuovoDistretto(){
         e.stopPropagation()
       
        axios   
-           .post("http://localhost:3001/direttore/add",direttore)
+           .post("https://distinta-fastweb.herokuapp.com/direttore/add",direttore)
            .then(alert(`${direttore.direttore} aggiunto`))
 
  setTimeout(()=>{

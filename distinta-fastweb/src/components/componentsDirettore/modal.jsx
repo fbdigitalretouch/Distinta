@@ -29,14 +29,14 @@ function  ModalMod(props) {
   
   useEffect(() => {
    axios
-       .get("http://localhost:3001/distretto")
+       .get("https://distinta-fastweb.herokuapp.com/distretto")
        .then(response => setDistretto(response.data))
        .catch(error => {console.log('There was an error!', error)})
         },[]);
 
     useEffect(() => {
      axios
-         .get("http://localhost:3001/utenti")
+         .get("https://distinta-fastweb.herokuapp.com/utenti")
          .then(response => setUtenti(response.data))
          .catch(error => {console.log('There was an error!', error)})
           },[]);
@@ -49,7 +49,7 @@ function  ModalMod(props) {
   const idSet = async (propId) => {
      const id = await propId;
        axios
-       .get(`http://localhost:3001/distinta/find/${id}`)
+       .get(`https://distinta-fastweb.herokuapp.com/distinta/find/${id}`)
        .then(response =>setDistinta(response.data))
        .catch(error => {console.log('There was an error!', error)})
 
@@ -76,10 +76,10 @@ const submitChange = async (submitId) => {
   const id = await submitId;
 
   axios 
-        .patch(`http://localhost:3001/distinta/update/${id}`,distinta)
+        .patch(`https://distinta-fastweb.herokuapp.com/distinta/update/${id}`,distinta)
         .then(response => {console.log(distinta);
              axios
-                 .get("http://localhost:3001/distinta")
+                 .get("https://distinta-fastweb.herokuapp.com/distinta")
                  .then(response => setDistinta(response.data))
                  .catch(error => {console.log('There was an error!', error)})})
         .catch(error => console.log('There was an error!', error))

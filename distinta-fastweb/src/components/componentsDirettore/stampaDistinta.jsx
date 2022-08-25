@@ -17,7 +17,7 @@ const [months,setMonths] = useState([]);
 
   useEffect(() => {
    axios
-       .get("http://localhost:3001/distinta")
+       .get("https://distinta-fastweb.herokuapp.com/distinta")
        .then(response => {setDistinta(response.data);
                           const yearz = response.data.map(e =>{return(e.year)})
                           const filteredY = yearz.filter((value,index) => {return yearz.indexOf(value) === index});
@@ -32,14 +32,14 @@ const [months,setMonths] = useState([]);
          
   useEffect(() => {
      axios
-         .get("http://localhost:3001/distretto")
+         .get("https://distinta-fastweb.herokuapp.com/distretto")
          .then(response => setDistretto(response.data))
          .catch(error => {console.log('There was an error!', error)})
           },[]);
 
   useEffect(() => {
      axios
-         .get("http://localhost:3001/utenti")
+         .get("https://distinta-fastweb.herokuapp.com/utenti")
          .then(response => setUtenti(response.data))
          .catch(error => {console.log('There was an error!', error)})
           },[]);
@@ -66,7 +66,7 @@ function handleChange(e){
 const submitChoise = async (event) => {
     event.preventDefault()
  await  axios
-        .get("http://localhost:3001/distinta/")
+        .get("https://distinta-fastweb.herokuapp.com/distinta/")
         .then(response => {console.log(choise);
           setDistinta(response.data.filter((choosen) => 
               choosen.distretto === choise.distretto && 

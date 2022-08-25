@@ -15,7 +15,7 @@ const [direttore,setDirettore] = useState();
 
 useEffect(() => {
     axios   
-        .get("http://localhost:3001/direttore")
+        .get("https://distinta-fastweb.herokuapp.com/direttore")
         .then(response => {setDirettore(() => {
             const dirRisp = response.data;
             if(dirRisp.map(e => {return(e.direttore)}).includes(dirName)){

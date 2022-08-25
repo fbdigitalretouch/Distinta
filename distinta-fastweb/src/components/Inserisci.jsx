@@ -12,13 +12,13 @@ function Inserisci(){
 
 
 useEffect(() => {
-  axios.get("http://localhost:3001/distretto")
+  axios.get("https://distinta-fastweb.herokuapp.com/distretto")
       .then(response => {setDistretto(response.data)})
       .catch(error => {console.log('There was an error!', error);},)},[])
 
 useEffect(() => {
   axios
-      .get("http://localhost:3001/utenti")
+      .get("https://distinta-fastweb.herokuapp.com/utenti")
       .then(response => {setUserList(response.data)})
       .catch(error => {console.log('There was an error!', error);},)},[])
 
@@ -61,7 +61,7 @@ useEffect(() => {
     
 
       axios
-      .post("http://localhost:3001/distinta/add", distinta)
+      .post("https://distinta-fastweb.herokuapp.com/distinta/add", distinta)
       .then(response => alert("Distinta aggiunta " + user.name))
       .catch(error => {console.log('There was an error!', error);}, []);
 
@@ -72,7 +72,7 @@ if(mappedUsers.includes(userLogged) === false){
 
 
       axios
-         .post("http://localhost:3001/utenti/add",userLogged)
+         .post("https://distinta-fastweb.herokuapp.com/utenti/add",userLogged)
          .then(response => alert("Utente Aggiunto " + user.name))
          .catch(error => {console.log('There was an error!', error);}, []);
         
