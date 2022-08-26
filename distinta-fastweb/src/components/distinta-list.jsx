@@ -3,7 +3,7 @@ import axios from "axios"
 import React,{useState,useEffect} from "react";
 import {Container,Form,Table,Button} from "react-bootstrap"
 import ReplayIcon from '@mui/icons-material/Replay';
-
+import SearchIcon from '@mui/icons-material/Search';
 
 function Distinta(){
 
@@ -104,10 +104,10 @@ return(
 
          </Form.Group>
           <Form.Group > 
-              <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" type="submit" >
-              Invia
+              <Button className="m-2 mb-4" size="lg" variant="warning" name="btn-submit" type="submit" >
+              <SearchIcon/>
               </Button>
-              <Button className="btn-lg modifyBtn ml-2" variant="warning" onClick={() => window.location.reload(false)}>  <ReplayIcon/> </Button>
+              <Button className="m-2 mb-4" size="lg" variant="warning" onClick={() => window.location.reload(false)}>  <ReplayIcon/> </Button>
               </Form.Group>
          </Form>
 

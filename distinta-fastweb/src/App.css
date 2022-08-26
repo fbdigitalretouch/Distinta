@@ -6,40 +6,23 @@
   margin-top: 3%;
 }
 
-.loginButton, .btnDirettore{
+.loginButton{
   color: #523100;
   background-color: #ffbb00;
   border-radius: 50px;
   border-color: transparent;
-  display: flex;
   justify-content: center;
-  align-items: center;
   height: 3em;
   width: 8em;
   font-size: large;
   font-weight: 600;
-  margin:auto;
-  margin-top: 40vh ;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.submitButton{
-  
-  color: #523100;
-  background-color: #ffbb00;
-  border-radius: 50px;
-  border-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 3em;
-  width: 8em;
-  font-size: large;
-  font-weight: 600;
-  margin:auto;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
 
-}
 
 .deletebtn,.editbtn{
   border-color:transparent;
@@ -54,11 +37,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.modifyBtn{
-  margin: 1vh 2vw 3vh 2vw;
-  width: 10%;
 }
 
 .hidden{

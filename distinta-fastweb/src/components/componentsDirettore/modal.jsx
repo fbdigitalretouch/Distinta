@@ -120,10 +120,10 @@ const submitChange = async (submitId) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Chiudi
           </Button>
-          <Button variant="primary" onClick={() => {submitChange(props.id);handleClose(); setTimeout(()=>{window.location.reload(false)},1000)}}>
-            Save Changes
+          <Button variant="warning" onClick={() => {submitChange(props.id);handleClose(); setTimeout(()=>{window.location.reload(false)},1000)}}>
+            Salva
           </Button>
         </Modal.Footer>
       </Modal>

@@ -4,6 +4,7 @@ import {Container,Form,Table,Button} from "react-bootstrap"
 import PrintIcon from '@mui/icons-material/Print';
 import Direttore from "../Direttore"
 import axios from "axios"
+import SearchIcon from '@mui/icons-material/Search';
 
 function StampaDistinta(){
 
@@ -113,10 +114,10 @@ return(
 
          </Form.Group>
         <Form.Group > 
-              <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" type="submit" >
-              Invia
+              <Button className="m-2 mb-4" size="lg" variant="warning" name="btn-submit" type="submit" >
+              <SearchIcon/>
               </Button>
-          <Button className="btn-lg modifyBtn" variant="warning" name="btn-submit" onClick={printMe}>
+          <Button className="m-2 mb-4" size="lg" variant="warning" name="btn-submit" onClick={printMe}>
               <PrintIcon/>
           </Button>
         </Form.Group>
