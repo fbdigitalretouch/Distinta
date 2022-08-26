@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 import React from "react";
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
+import {Button} from "react-bootstrap"
 
 import Navigationbar from './components/navbar';
 import DistintaList from "./components/distinta-list"
@@ -40,7 +41,7 @@ function App() {
             <Route path="/direttore/nuovoDistretto" element={<NuovoDistretto/>} />
             <Route path="/direttore/modifica" element={<ModificaDistinta/>} />
             <Route path="/direttore/stampaDistinta" element={<StampaDistinta/>} />
-            </Routes> : <button className='loginButton' onClick={() => loginWithRedirect()}>Log In</button>}
+            </Routes> : <Button className="loginButton" variant="warning" size="lg" onClick={() => loginWithRedirect()}>Log In</Button>}
         </Router>
 
     </div>
