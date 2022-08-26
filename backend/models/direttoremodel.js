@@ -11,7 +11,6 @@ const direttoreSchema = new Schema({
     }
 });
 
-
 const Direttore = mongoose.model("Direttore", direttoreSchema);
 
 
